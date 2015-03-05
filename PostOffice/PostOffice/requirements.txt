@@ -1,0 +1,8 @@
+Django==1.7.5
+djangorestframework==3.0.5
+ecdsa==0.13
+Fabric==1.10.1
+paramiko==1.15.2
+Paver==1.2.4
+psycopg2==2.6
+pycrypto==2.6.1
