@@ -37,11 +37,27 @@ class Delivery_Routes (models.Model):
 	time_left=models.DateTimeField()
 	time_returned = models.DateTimeField()
 	last_location = models.CharField(max_length=50)
+
 class Incoming_Shipments(models.Model):
 	route_id = models.IntegerField(max_length=10, primary_key=True)
 	post_office_shipping_from = models.IntegerField(max_length=5)
 	post_office_shipping_to = models.IntegerField(max_length=5)
 	route_type = models.IntegerField(max_length=5)
+
+class Customer(models.Model):
+	customer_id = models.AutoField(primary_key=True)
+	phone_number = models.IntegerField(max length=10)
+	first_name = models.CharField(max length=25)
+	last_name = models.CharField(max length=25)
+	customer_email = models.CharField(max length=50)
+	date_joined = models.DateField()
+
+class Driver(models.Model):
+	driver_id = models.AutoField(primary_key=True)
+	driver_ssn = models.IntegerField(max length=9)
+	driver_name = models.CharField(max length=25)
+	driver_phone_number = models.IntegerField(max length=10)
+	drug_test_passed = models.BooleanField()
 
 
 
