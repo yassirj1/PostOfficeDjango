@@ -58,7 +58,48 @@ class Driver(models.Model):
 	driver_name = models.CharField(max length=25)
 	driver_phone_number = models.IntegerField(max length=10)
 	drug_test_passed = models.BooleanField()
+	
+class Post_Office_Shipped_From(models.Model):
+	HOUSTON = 01
+	DALLAS = 02
+	AUSTIN = 03
+	SAN_ANTONIO = 04
+	EL_PASO = 05
+	POST_OFFICE_SHIPPED_FROM_CHOICES = (
+		(HOUSTON, 77025),
+		(DALLAS, 75032),
+		(AUSTIN, 78721),
+		(SAN_ANTONIO, 78205),
+		(EL_PASO, 79922),
+	)
+	post_office_num = models.IntegerField(max_length=5, choices=POST_OFFICE_SHIPPED_FROM_CHOICES, default=HOUSTON, primary_key=TRUE)
 
+class Package_Type(models.Model):
+	ONE_DAY=00001
+	TWO_DAY=00002
+	THREE_DAY=00003
+	GROUND=00004
+	FREIGHT=00005
+	PACKAGE_TYPE_CHOICES = (
+		(ONE_DAY, 'One Day'),
+		(TWO_DAY, 'Two Day'),
+		(THREE_DAY, 'Three Day'),
+		(GROUND, 'Ground'),
+		(FREIGHT, 'Freight'),
+	)
+	package_code = models.IntegerField(max_length=5, choices=PACKAGE_TYPE_CHOICES, default=GROUND, primary_key=TRUE)
+
+class Shipment_Type(models.Model):
+	LAND=00010
+	AIR=00020
+	SEA=00030
+	SHIPMENT_TYPE_CHOICES = (
+		(LAND, 'Ground'),
+		(AIR, 'Air'),
+		(SEA, 'Sea'),
+	)
+	route_type_code(max_length=5, choices=SHIPMENT_TYPE_CHOICES, default=LAND)
+	
 
 class Delivery_Status(models.Model):
 	Enrouted = 'EN'
