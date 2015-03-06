@@ -29,6 +29,19 @@ class Address(models.Model):
 	country = models.IntegerField(max_length=4)
 	zipcode = models.IntegerField(max_length=5)
 
+class Delivery_Routes (models.Model):
+	delivery_route_id = models.IntegerField(max_length=10, primary_key=True)
+	zipcode = models.IntegerField(max_length=5)
+	shipments_carried = models.IntegerField(max_length=7)
+	driver_id = models.ForeignKey(Driver, related_name="driver")
+	time_left=models.DateTimeField()
+	time_returned = models.DateTimeField()
+	last_location = models.CharField(max_length=50)
+class Incoming_Shipments(models.Model):
+	route_id = models.IntegerField(max_length=10, primary_key=True)
+	post_office_shipping_from = models.IntegerField(max_length=5)
+	post_office_shipping_to = models.IntegerField(max_length=5)
+	route_type = models.IntegerField(max_length=5)
 
 
 
