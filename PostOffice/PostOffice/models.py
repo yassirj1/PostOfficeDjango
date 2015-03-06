@@ -126,9 +126,16 @@ class Order_Status(models.Model):
 	Order_Status = models.CharField(max length=2, choices=Order_Status, default=Pending)
 
 
-
-
-
+class Country(models.Model):
+	UNITED_STATES = 'US'
+	CANADA = 'CA'
+	MEXICO = 'MX'
+	Country_Enum = (
+		(UNITED_STATES, 'Enrouted'),
+		(CANADA, 'Completed'),
+		(MEXICO, 'Returned'),
+	)
+	country = models.CharField(max length=2, choices=Country_Enum, default=UNITED_STATES)
 
 
 
