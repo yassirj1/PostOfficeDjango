@@ -2,9 +2,9 @@ from django.db import models
 
 class Shipments(models.Model):
 	tracking_number = models.CharField(max_length=200,primary_key=True)
-	customer_id = models.ForeignKey("Customer")
+	customer_id = models.ForeignKey(Customer, related_name="customer")
 	time_shipped = models.DateTimeField()
-	reciever_address = models.ForeignKey("Address")
+	reciever_address = models.ForeignKey(Address, related_name="address")
 	receiver_name = models.CharField(max_length=200)
 	post_office_shipped_from = models.IntegerField(max_length=5)
 	date_ship = models.DateField()
@@ -33,7 +33,7 @@ class Delivery_Routes (models.Model):
 	delivery_route_id = models.IntegerField(max_length=10, primary_key=True)
 	zipcode = models.IntegerField(max_length=5)
 	shipments_carried = models.IntegerField(max_length=7)
-	driver_id = models.ForeignKey("Driver")
+	driver_id = models.ForeignKey(Driver, related_name="driver")
 	time_left=models.DateTimeField()
 	time_returned = models.DateTimeField()
 	last_location = models.CharField(max_length=50)
@@ -46,26 +46,43 @@ class Incoming_Shipments(models.Model):
 
 class Customer(models.Model):
 	customer_id = models.AutoField(primary_key=True)
-	phone_number = models.IntegerField(max_length=10)
-	first_name = models.CharField(max_length=25)
-	last_name = models.CharField(max_length=25)
-	customer_email = models.CharField(max_length=50)
+	phone_number = models.IntegerField(max length=10)
+	first_name = models.CharField(max length=25)
+	last_name = models.CharField(max length=25)
+	customer_email = models.CharField(max length=50)
 	date_joined = models.DateField()
 
 class Driver(models.Model):
 	driver_id = models.AutoField(primary_key=True)
-	driver_ssn = models.IntegerField(max_length=9)
-	driver_name = models.CharField(max_length=25)
-	driver_phone_number = models.IntegerField(max_length=10)
+	driver_ssn = models.IntegerField(max length=9)
+	driver_name = models.CharField(max length=25)
+	driver_phone_number = models.IntegerField(max length=10)
 	drug_test_passed = models.BooleanField()
 
 
-	
+class Delivery_Status(models.Model):
+	Enrouted = 'EN'
+	Completed = 'CO'
+	Returned = 'RE'
+	Damaged = 'DA'
+	Delivery_Status = (
+		(Enrouted, 'Enrouted'),
+		(Completed, 'Completed'),
+		(Returned, 'Returned'),
+		(Damaged, 'Damaged')
+	)
+	Delivery_Status = models.CharField(max length=2, choices=Delivery_Status, default=Enrouted)
 
-
-
-
-
+class Order_Status(models.Model):
+	Pending = 'PE'
+	Delivered = 'DE'
+	Cancelled = 'CA'
+	Order_Status = (
+		(Pending, 'Pending'),
+		(Delivered,'Delivered'),
+		(Cancelled, 'Cancelled')
+	)
+	Order_Status = models.CharField(max length=2, choices=Order_Status, default=Pending)
 
 
 
