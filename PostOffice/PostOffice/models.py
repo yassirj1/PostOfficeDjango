@@ -141,6 +141,110 @@ class Country(models.Model):
 
 
 
+Class State(model.Model):
+alabama = '00'
+alaska = '01'
+arizona = '02'
+arkansas = '04'
+california = '05'
+colorado = '06'
+connecticut = '07'
+delaware = '08'
+florida = '08'
+georgia = '09'
+hawaii = '10'
+idaho = '11'
+illinois = '12'
+indiana = '13'
+iowa = '14'
+kansas = '15'
+kentucky = '16'
+louisiana = '17'
+maine = '18'
+maryland = '19'
+massachusetts = '20'
+michigan = '21'
+minnesota = '22'
+mississippi = '23'
+missouri = '24'
+montana = '25'
+nebraska = '26'
+nevada = '27'
+newhampshire = '28'
+newjersey = '29'
+newmexico = '30'
+newyork = '31'
+northcarolina = '32'
+northdakota = '33'
+ohio = '34'
+oklahoma = '35'
+oregon = '36'
+pennsylvania = '37'
+rhodeisland = '38'
+southcarolina = '39'
+southdakota = '40'
+tennessee = '41'
+texas = '42'
+utah = '43'
+vermont = '44'
+virginia = '45'
+washington = '46'
+westvirginia = '47' 
+wisconsin = '48'
+wyoming	= '49'		
+
+State_code = (
+('alabama', 'Alabama'),
+('alaska', 'Alaska'),
+('arizona', 'Arizona'),
+('arkansas', 'Arkansas'),
+('california', 'California'),
+('colorado', 'Colorado'),
+('connecticut', 'Connecticut'),
+('delaware', 'Delaware'),
+('florida', 'Florida'),
+('georgia', 'Georgia'),
+('hawaii', 'Hawaii'),
+('idaho', 'Idaho'),
+('illinois', 'Illinois'),
+('indiana', 'Indiana'),
+('iowa', 'Iowa'),
+('kansas', 'Kansas'),
+('kentucky', 'Kentucky'),
+('louisiana', 'Louisiana'),
+('maine', 'Maine'),
+('maryland', 'Maryland'),
+('massachusetts', 'Massachusetts'),
+('michigan', 'Michigan'),
+('minnesota', 'Minnesota'),
+('mississippi', 'Mississippi'),
+('missouri', 'Missouri'),
+('montana', 'Montana'),
+('nebraska', 'Nebraska'),
+('nevada', 'Nevada'),
+('newhampshire', 'New Hampshire'),
+('newjersey', 'New Jersey'),
+('newmexico', 'New Mexico'),
+('newyork', 'New York'),
+('northcarolina', 'North Carolina'),
+('northdakota', 'North Dakota'),
+('ohio', 'Ohio'),
+('oklahoma', 'Oklahoma'),
+('oregon', 'Oregon'),
+('pennsylvania', 'Pennsylvania'),
+('rhodeisland', 'Rhode Island'),
+('southcarolina', 'South Carolina'),
+('southdakota', 'South Dakota'),
+('tennessee', 'Tennessee'),
+('texas', 'Texas'),
+('utah', 'Utah'),
+('vermont', 'Vermont'),
+('virginia', 'Virginia'),
+('washington', 'Washington'),
+('westvirginia', 'West Virginia'),
+('Wisconsin', 'Wisconsin'),
+('wyoming', 'Wyoming'),
+) 
 
 
 
