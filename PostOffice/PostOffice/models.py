@@ -2,9 +2,9 @@ from django.db import models
 
 class Shipments(models.Model):
 	tracking_number = models.CharField(max_length=200,primary_key=True)
-	customer_id = models.ForeignKey(Customer, related_name="customer")
+	customer_id = models.ForeignKey("Customer")
 	time_shipped = models.DateTimeField()
-	reciever_address = models.ForeignKey(Address, related_name="address")
+	reciever_address = models.ForeignKey("Address")
 	receiver_name = models.CharField(max_length=200)
 	post_office_shipped_from = models.IntegerField(max_length=5)
 	date_ship = models.DateField()
@@ -33,7 +33,7 @@ class Delivery_Routes (models.Model):
 	delivery_route_id = models.IntegerField(max_length=10, primary_key=True)
 	zipcode = models.IntegerField(max_length=5)
 	shipments_carried = models.IntegerField(max_length=7)
-	driver_id = models.ForeignKey(Driver, related_name="driver")
+	driver_id = models.ForeignKey("Driver")
 	time_left=models.DateTimeField()
 	time_returned = models.DateTimeField()
 	last_location = models.CharField(max_length=50)
@@ -46,17 +46,17 @@ class Incoming_Shipments(models.Model):
 
 class Customer(models.Model):
 	customer_id = models.AutoField(primary_key=True)
-	phone_number = models.IntegerField(max length=10)
-	first_name = models.CharField(max length=25)
-	last_name = models.CharField(max length=25)
-	customer_email = models.CharField(max length=50)
+	phone_number = models.IntegerField(max_length=10)
+	first_name = models.CharField(max_length=25)
+	last_name = models.CharField(max_length=25)
+	customer_email = models.CharField(max_length=50)
 	date_joined = models.DateField()
 
 class Driver(models.Model):
 	driver_id = models.AutoField(primary_key=True)
-	driver_ssn = models.IntegerField(max length=9)
-	driver_name = models.CharField(max length=25)
-	driver_phone_number = models.IntegerField(max length=10)
+	driver_ssn = models.IntegerField(max_length=9)
+	driver_name = models.CharField(max_length=25)
+	driver_phone_number = models.IntegerField(max_length=10)
 	drug_test_passed = models.BooleanField()
 
 
