@@ -1,8 +1,10 @@
 from django.db import models
 
-
+class Address_Manager(models.Manager):
+    pass
 
 class Address(models.Model):
+	objects = Address_Manager()
 	address_id = models.AutoField(max_length=10,primary_key=True)
 	street_line1 = models.CharField(max_length=50)
 	street_line2 = models.CharField(max_length=50)
@@ -13,13 +15,27 @@ class Address(models.Model):
 	country = models.IntegerField(max_length=4)
 	zipcode = models.IntegerField(max_length=5)
 
+	def __unicode__(self):
+   	    return '{} {}'.format(self.street_line1, self.street_line2, self.street_line3 , self.street_line4 , self.city , self.state, self.country , self.zipcode)
+
+class Incoming_Shipments_Manager(models.Manager):
+	pass
+
 class Incoming_Shipments(models.Model):
+	objects = Incoming_Shipments_Manager()
 	route_id = models.IntegerField(max_length=10, primary_key=True)
 	post_office_shipping_from = models.IntegerField(max_length=5)
 	post_office_shipping_to = models.IntegerField(max_length=5)
 	route_type = models.IntegerField(max_length=5)
 
+	def __unicode__(self):
+   	    return '{} {}'.format(self.route_id, self.post_office_shipping_from, self.post_office_shipping_to , self.route_type )
+
+class Customer_Manager(models.Manager):
+	pass
+
 class Customer(models.Model):
+	objects = Customer_Manager()
 	customer_id = models.AutoField(primary_key=True)
 	phone_number = models.IntegerField(max_length=10)
 	first_name = models.CharField(max_length=25)
@@ -27,11 +43,19 @@ class Customer(models.Model):
 	customer_email = models.CharField(max_length=50)
 	date_joined = models.DateField()
 
+	def __unicode__(self):
+   	    return '{} {}'.format(self.customer_id, self.phone_number, self.first_name ,
+        	self.last_name , self.customer_email , self.date_joined)
+
+class Shipments_Manager(models.Manager):
+	pass
+
 class Shipments(models.Model):
+	objects = Shipments_Manager()
 	tracking_number = models.CharField(max_length=200,primary_key=True)
-	customer_id = models.ForeignKey(Customer)
+	customer_id = models.ForeignKey(Customer, related_name = "ShipmentCustomer")
 	time_shipped = models.DateTimeField()
-	reciever_address = models.ForeignKey(Address)
+	reciever_address = models.ForeignKey(Address, related_name = "ShipmentAddress")
 	receiver_name = models.CharField(max_length=200)
 	post_office_shipped_from = models.IntegerField(max_length=5)
 	date_ship = models.DateField()
@@ -45,21 +69,44 @@ class Shipments(models.Model):
 	signature_required = models.BooleanField()
 	signature_confirmed = models.BooleanField()
 
+	def __unicode__(self):
+   	    return '{} {}'.format(self.tracking_number, self.customer_id, self.time_shipped ,
+        	self.reciever_address , self.receiver_name , self.post_office_shipped_from, self.date_ship , 
+        	self.est_arrival , self.last_post_office , self.order_status , self.delivery_status , 
+        	self.package_type , self.package_weight , self.package_rate , self.signature_required ,
+        	self.signature_confirmed)
+
+class Driver_Manager(models.Manager):
+	pass
+
 class Driver(models.Model):
+	objects = Driver_Manager()
 	driver_id = models.AutoField(primary_key=True)
 	driver_ssn = models.IntegerField(max_length=9)
 	driver_name = models.CharField(max_length=25)
 	driver_phone_number = models.IntegerField(max_length=10)
 	drug_test_passed = models.BooleanField()
 
+	def __unicode__(self):
+   	    return '{} {}'.format(self.driver_id, self.driver_ssn, self.driver_name ,
+        	self.driver_phone_number , self.drug_test_passed)
+
+class Delivery_Routes_Manager(models.Manager):
+	pass
+
 class Delivery_Routes (models.Model):
+	objects = Delivery_Routes_Manager()
 	delivery_route_id = models.IntegerField(max_length=10, primary_key=True)
 	zipcode = models.IntegerField(max_length=5)
 	shipments_carried = models.IntegerField(max_length=7)
-	driver_id = models.ForeignKey(Driver)
+	driver_id = models.ForeignKey(Driver, related_name = "RouteDriver")
 	time_left=models.DateTimeField()
 	time_returned = models.DateTimeField()
 	last_location = models.CharField(max_length=50)
+
+	def __unicode__(self):
+   	    return '{} {}'.format(self.delivery_route_id , self.zipcode , self.shipments_carried , 
+        	self.driver_id , self.time_left , self.time_returned , self.last_location)
 	
 class Post_Office_Shipped_From(models.Model):
 	HOUSTON = 01
