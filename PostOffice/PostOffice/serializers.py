@@ -27,3 +27,18 @@ class DriverSerializer(serializers.ModelSerializer):
 	fields = ('driver_id','driver_ssn','driver_name','driver_phone_number',
 	'drug_test_passed')			
 				
+class Incoming_ShipmentsSerializer(serializers.ModelSerializer):
+	"""
+	Serializing all the Incoming_shipments
+	"""
+	class Meta:
+		model = Incoming_Shipments
+		fields = ('route_id', 'post_office_shipping_from', 'post_office_shipping_to', 'route_type')
+
+class CustomerSerializer(serializers.ModelSerializer):
+	"""
+	Serializing all the Customer
+	"""
+	class Meta:
+		model = Customer
+		fields = ('customer_id', 'phone_number', 'first_name', 'last_name', 'customer_email', 'date_joined')
