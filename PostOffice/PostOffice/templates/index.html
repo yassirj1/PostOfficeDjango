@@ -1,0 +1,19 @@
+{% load url from future %}
+
+<h2>Addresses</h2>
+
+<form action="{% url 'address-list' %}" method="post">
+  <input type="text" name="first_name" />
+  <input type="text" name="last_name" />
+  <input type="books" name="books" />
+  <input type="submit" value="Add Address" />
+</form>
+
+<ul>
+    {% for address in addresses %}
+        <li>
+            <!-- this URL is built manually -->
+            <a href="{% url 'address-instance' address.id %}">{{address.first_name}} {{address.last_name}}</a>
+        </li>
+    {% endfor %}
+</ul>

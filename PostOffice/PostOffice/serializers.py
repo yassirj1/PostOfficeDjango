@@ -1,3 +1,13 @@
+from rest_framework import serializers
+
+from PostOffice.models import (
+    Shipments,
+    Customer,
+    Delivery_Routes,
+    Address,
+    Driver,
+    Incoming_Shipments
+)
 
 class ShipmentsSerializer(serializers.ModelSerializer):
     customer_id = CustomerSerializer(many=True)
