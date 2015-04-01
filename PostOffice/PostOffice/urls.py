@@ -7,8 +7,8 @@ from PostOffice import views
 urlpatterns = patterns(
     '',
     url(r'^$', views.index_view, name='index_view'),
-    url(r'^address/$', views.AddressView.as_view(), name='address-list'),
-    url(r'^address/(?P<pk>[\d]+)/$', views.AddressInstanceView.as_view(), name = 'address-instance'),
+    url(r'^addresses/$', views.AddressView.as_view(), name='address-list'),
+    url(r'^addresses/(?P<pk>[\d]+)/$', views.AddressInstanceView.as_view(), name = 'address-instance'),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

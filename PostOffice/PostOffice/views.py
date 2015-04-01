@@ -20,8 +20,6 @@ class AddressView(generics.ListCreateAPIView):
     """
     model = Address
     serializer_class = AddressSerializer
-    def post(self, *args, **kwargs):
-        import pdb; pdb.set_trace()
 
 class AddressInstanceView(generics.RetrieveAPIView):
     """

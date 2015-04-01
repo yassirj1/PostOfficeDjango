@@ -17,7 +17,7 @@ class CustomerSerializer(serializers.ModelSerializer):
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = ('adress_id','street_line1','street_line2',
+        fields = ('address_id','street_line1','street_line2',
         'street_line3','street_line4','city','state','country','zipcode')
 
 class ShipmentsSerializer(serializers.ModelSerializer):
