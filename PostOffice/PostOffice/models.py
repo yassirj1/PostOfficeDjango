@@ -52,7 +52,8 @@ class Shipments_Manager(models.Manager):
 
 class Shipments(models.Model):
 	objects = Shipments_Manager()
-	tracking_number = models.CharField(max_length=200,primary_key=True)
+	shipment_id = models.AutoField(primary_key=True)
+	tracking_number = models.CharField(max_length=200)
 	customer_id = models.ForeignKey(Customer, related_name = "ShipmentCustomer")
 	time_shipped = models.DateTimeField()
 	reciever_address = models.ForeignKey(Address, related_name = "ShipmentAddress")

@@ -21,11 +21,11 @@ class AddressSerializer(serializers.ModelSerializer):
         'street_line3','street_line4','city','state','country','zipcode')
 
 class ShipmentsSerializer(serializers.ModelSerializer):
-    customer_id = CustomerSerializer(many=True)
-    reciever_address = AddressSerializer(many=True)
+    customer_id = CustomerSerializer()
+    reciever_address = AddressSerializer()
     class Meta:
         model = Shipments
-        fields = ('tracking_number', 'customer_id', 'time_shipped', 'reciever_address', 'receiver_name', 'post_office_shipped_from','date_ship', 'est_arrival', 'last_post_office', 'order_status', 'delivery_status', 'package_type', 'package_weight', 'package_rate', 'signature_required', 'signature_confirmed')
+        fields = ('shipment_id', 'tracking_number', 'customer_id', 'time_shipped', 'reciever_address', 'receiver_name', 'post_office_shipped_from','date_ship', 'est_arrival', 'last_post_office', 'order_status', 'delivery_status', 'package_type', 'package_weight', 'package_rate', 'signature_required', 'signature_confirmed')
 
 class DriverSerializer(serializers.ModelSerializer):
     class Meta:
