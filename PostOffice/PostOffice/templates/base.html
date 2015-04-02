@@ -8,13 +8,7 @@
 </head>
 <body style="background-color:#F4F2D0" ng-app="{% block ng_app %}PostOffice.static{% endblock %}">
 <div class="content" ng-controller="{% block ng_controller %}AppController{% endblock %}">{% block content %}
-{% verbatim %}
-    <div class="panel" ng-repeat="address in addresses">
-        <div class="panel-heading clearfix">
-            <h3 class="panel-title">{{ address.street_line1 }} {{address.city}} {{address.state}} {{address.zipcode}} {{address.country}} </h3>
 
-   `
-{% endverbatim %}
 {% endblock %}</div>
 <script src="{% static "underscore/underscore.js" %}"></script>
 <script src="{% static "angular/angular.js" %}"></script>

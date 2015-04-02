@@ -29,3 +29,14 @@
     {% endfor %}
 </ul> 
 -->
+
+{% block content %}
+{% verbatim %}
+    <div class="panel" ng-repeat="address in addresses">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title">{{ address.street_line1 }} {{address.city}} {{address.state}} {{address.zipcode}} {{address.country}} </h3>
+	</div>
+    </div>
+   
+{% endverbatim %}
+{% endblock %}
