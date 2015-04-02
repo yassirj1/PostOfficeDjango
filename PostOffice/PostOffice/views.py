@@ -57,6 +57,58 @@ class ShipmentsInstanceView(generics.RetrieveAPIView):
     queryset = Shipments.objects.all()
     model = Shipments
     serializer_class = ShipmentsSerializer
+class CustomerView(generics.ListCreateAPIView):
+	"""
+	Returns a list of all Customers
+	"""
+	queryset = Customer.objects.all()
+	model = Customer
+	serializer_class= CustomerSerializer
+
+class CustomerInstanceView(generics.RetrieveAPIView):
+	queryset = Customer.objects.all()
+	model = Customer
+	serializer_class = CustomerSerializer	
+
+class IncomingShipmentsView(generics.ListCreateAPIView):
+	"""
+	Returns a list of all Customers
+	"""
+	queryset = Incoming_Shipments.objects.all()
+	model = Incoming_Shipments
+	serializer_class= IncomingShipmentsSerializer
+
+class IncomingShipmentsInstanceView(generics.RetrieveAPIView):
+	queryset = Incoming_Shipments.objects.all()
+	model = Incoming_Shipments
+	serializer_class = IncomingShipmentsSerializer
+
+class DriverView(generics.ListCreateAPIView):
+	"""
+	Returns a list of all Customers
+	"""
+	queryset = Driver.objects.all()
+	model = Driver
+	serializer_class= DriverSerializer
+
+class DriverInstanceView(generics.RetrieveAPIView):
+	queryset = Driver.objects.all()
+	model = Driver
+	serializer_class = DriverSerializer
+
+class DeliveryRoutesView(generics.ListCreateAPIView):
+	"""
+	Returns a list of all Customers
+	"""
+	queryset = Delivery_Routes.objects.all()
+	model = Delivery_Routes
+	serializer_class= DeliveryRoutesSerializer
+
+class DeliveryRoutesInstanceView(generics.RetrieveAPIView):
+	queryset = Delivery_Routes.objects.all()
+	model = Delivery_Routes
+	serializer_class = DeliveryRoutesSerializer
+
 
 # def address_instance_view(request, pk):
 #     address = get_object_or_404(Address, address_id=pk)

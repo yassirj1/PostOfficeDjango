@@ -39,7 +39,7 @@ class DeliveryRoutesSerializer(serializers.ModelSerializer):
         model = Delivery_Routes
         fields = ('delivery_route_id', 'zipcode', 'shipments_carried', 'driver_id', 'time_left', 'time_returned', 'last_location')
 
-class Incoming_ShipmentsSerializer(serializers.ModelSerializer):
+class IncomingShipmentsSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Incoming_Shipments
 		fields = ('route_id', 'post_office_shipping_from', 'post_office_shipping_to', 'route_type')
