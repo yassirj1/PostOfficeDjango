@@ -1,17 +1,11 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.addresses', []);
+  app = angular.module('PostOffice.app.addresses', ['PostOffice.api']);
 
   app.controller('AppController', [
-    '$scope', '$http', function($scope, $http) {
-      return $scope.addresses = [
-        {
-          streetline1: '1',
-          streetline2: '2',
-          streetline3: '3'
-        }
-      ];
+    '$scope', 'AllAddress', function($scope, AllAddress) {
+      return $scope.customers = Address.query();
     }
   ]);
 
@@ -20,7 +14,7 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.Customer', ['PostOffice.api']);
+  app = angular.module('PostOffice.app.customer', ['PostOffice.api']);
 
   app.controller('AppController', [
     '$scope', 'Customer', function($scope, Customer) {
@@ -33,35 +27,11 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.api', ['ngResource']);
+  app = angular.module('PostOffice.app.deliveryroutes', ['PostOffice.api']);
 
-  app.factory('Address', [
-    '$resource', function($resource) {
-      return $resource('/adresses/:address_id', {
-        address_id: '@address_id'
-      });
-    }
-  ]);
-
-  app.factory('Shipments', [
-    '$resource', function($resource) {
-      return $resource('/shipments/:shipment_id', {
-        shipment_id: '@shipment_id'
-      });
-    }
-  ]);
-
-  app.factory('Customer', [
-    '$resource', function($resource) {
-      return $resource('/customer/:customer_id', {
-        customer_id: '@customer_id'
-      });
-    }
-  ]);
-
-  app.factory('Address', [
-    '$resource', function($resource) {
-      return $resource('/adresses');
+  app.controller('AppController', [
+    '$scope', 'Delivery_Routes', function($scope, Delivery_Routes) {
+      return $scope.delivery_routes = Delivery_Routes.query();
     }
   ]);
 
@@ -70,7 +40,83 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.api.playground', []);
+  app = angular.module('PostOffice.app.driver', ['PostOffice.api']);
+
+  app.controller('AppController', [
+    '$scope', 'Driver', function($scope, Driver) {
+      return $scope.driver = Driver.query();
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('PostOffice.app.incomingshipments', ['PostOffice.api']);
+
+  app.controller('AppController', [
+    '$scope', 'Incoming_Shipments', function($scope, Incoming_Shipments) {
+      return $scope.incoming_shipments = Incoming_Shipments.query();
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('PostOffice.app.shipment', ['PostOffice.api']);
+
+  app.controller('AppController', [
+    '$scope', 'Shipment', function($scipe, Shipment) {
+      return $scope.shipment = Shipment.query();
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('PostOffice.api', ['ngResource']);
+
+  app.factory('Address', [
+    '$resource', function($resource) {
+      return $resource('/api/addresses/:address_id', {
+        address_id: '@address_id'
+      });
+    }
+  ]);
+
+  app.factory('Shipments', [
+    '$resource', function($resource) {
+      return $resource('/api/shipments/:shipment_id', {
+        shipment_id: '@shipment_id'
+      });
+    }
+  ]);
+
+  app.factory('Customer', [
+    '$resource', function($resource) {
+      return $resource('/api/customer/:customer_id', {
+        customer_id: '@customer_id'
+      });
+    }
+  ]);
+
+  app.factory('AllAddress', [
+    '$resource', function($resource) {
+      return $resource('/api/addresses');
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var aapp;
+
+  aapp = angular.module('PostOffice.api.playground', []);
 
   app.factory('User', [
     '$q', function($q) {

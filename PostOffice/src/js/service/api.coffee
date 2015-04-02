@@ -12,7 +12,7 @@ app.factory 'Customer', ['$resource', ($resource) ->
     $resource '/api/customer/:customer_id', customer_id: '@customer_id'
 ]
 
-app.factory 'Address', ['$resource', ($resource) ->
+app.factory 'AllAddress', ['$resource', ($resource) ->
 	$resource '/api/addresses'
 ]
 
