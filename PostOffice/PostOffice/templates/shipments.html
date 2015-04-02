@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block ng_app %}PostOffice.app.addresses{% endblock %}
+
+{% load url from future %}
+
+<h2>Shipments<h2>
+
+<form action="{% url 'shipments-list' %}" method="post">
+  <input type="text" name="tracking_number" />
+  <input type="text" name="customer_id" />
+  <input type="text" name="time_shipped" />
+  <input type="text" name="reciever_address" />
+  <input type="text" name="receiver_name" />
+  <input type="text" name="post_office_shipped_from" />
+  <input type="text" name="date_ship" />
+  <input type="text" name="est_arrival" />
+  <input type="text" name="last_post_office" />
+  <input type="text" name="order_status" />
+  <input type="text" name="delivery_status" />
+  <input type="text" name="package_type" />
+  <input type="text" name="package_weight" />
+  <input type="text" name="package_rate" />
+  <input type="text" name="signature_required" />
+  <input type="text" name="signature_confirmed" />
+
+  <input type="submit" value="Add_Shipment" />
+</form>
+
+
+ <ul>
+    {% for shipment in shipments %}
+        <li>
+            <a href="{% url 'shipments-instance' shipment.shipment_id %}">{{shipment.tracking_number}} {{address.customer_id}} {{address.time_shipped}} {{address.reciever_address}} {{address.receiver_name}}</a>
+        </li>
+    {% endfor %}
+</ul> 
+

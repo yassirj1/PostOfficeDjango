@@ -1,4 +1,4 @@
-app = angular.module 'PostOffice.api.playground', []
+aapp = angular.module 'PostOffice.api.playground', []
 
 app.factory 'User', ['$q', ($q) ->
     storage = {}

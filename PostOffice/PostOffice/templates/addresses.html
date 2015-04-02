@@ -1,3 +1,27 @@
 {% extends 'base.html' %}
 
 {% block ng_app %}PostOffice.app.addresses{% endblock %}
+
+{% load url from future %}
+
+<h2>Addresses</h2>
+
+<form action="{% url 'address-list' %}" method="post">
+  <input type="text" name="street_line1" />
+  <input type="text" name="street_line2" />
+  <input type="text" name="street_line3" />
+  <input type="text" name="street_line4" />
+  <input type="text" name="city" />
+  <input type="text" name="state" />
+  <input type="text" name="country" />
+  <input type="text" name="zipcode" />
+  <input type="submit" value="Add_Address" />
+</form>
+
+ <ul>
+    {% for address in addresses %}
+        <li>
+            <a href="{% url 'address-instance' address.address_id %}">{{address.street_line1}} {{address.street_line2}} {{address.street_line3}} {{address.street_line4}} {{address.city}} {{address.state}} {{address.country}} {{address.zipcode}}</a>
+        </li>
+    {% endfor %}
+</ul> 

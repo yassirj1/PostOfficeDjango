@@ -9,7 +9,7 @@ from PostOffice.serializers import AddressSerializer, ShipmentsSerializer
 class SimpleStaticView(TemplateView):
     def get_template_names(self):
         return [self.kwargs.get('template_name') + ".html"]
-        
+
     def get(self, request, *args, **kwargs):
         return super(SimpleStaticView, self).get(request, *args, **kwargs)
 
@@ -45,6 +45,7 @@ class ShipmentsView(generics.ListCreateAPIView):
     """
     Returns a list of all Addresses.
     """
+    queryset = Shipments.objects.all()
     model = Shipments
     serializer_class = ShipmentsSerializer
 
