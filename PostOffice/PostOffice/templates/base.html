@@ -3,8 +3,10 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="{% static "bootstrap/dist/css/bootstrap.css" %}">
+<center><h1> Uma's Postal Service</h1>
+<h3>The Best Way To Track Your Package</h3></center>
 </head>
-<body ng-app="{% block ng_app %}PostOffice.static{% endblock %}">
+<body style="background-color:#F4F2D0" ng-app="{% block ng_app %}PostOffice.static{% endblock %}">
 <div class="content" ng-controller="{% block ng_controller %}AppController{% endblock %}">{% block content %}
 {% verbatim %}
     <div class="panel" ng-repeat="address in addresses">
