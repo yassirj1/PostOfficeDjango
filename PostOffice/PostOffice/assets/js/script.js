@@ -1,11 +1,16 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.addresses', ['PostOffice.api']);
+  app = angular.module('PostOffice.app.addresses', []);
 
   app.controller('AppController', [
-    '$scope', 'AllAddress', function($scope, AllAddress) {
-      return $scope.customers = Address.query();
+    '$scope', '$http', function($scope, $http) {
+      $scope.addresses = [];
+      return $http.get('/api/addresses/').then(function(result) {
+        return angular.forEach(result.data, function(item) {
+          return $scope.addresses.push(item);
+        });
+      });
     }
   ]);
 
@@ -81,14 +86,6 @@
 
   app = angular.module('PostOffice.api', ['ngResource']);
 
-  app.factory('Address', [
-    '$resource', function($resource) {
-      return $resource('/api/addresses/:address_id', {
-        address_id: '@address_id'
-      });
-    }
-  ]);
-
   app.factory('Shipments', [
     '$resource', function($resource) {
       return $resource('/api/shipments/:shipment_id', {
@@ -105,9 +102,9 @@
     }
   ]);
 
-  app.factory('AllAddress', [
+  app.factory('Address', [
     '$resource', function($resource) {
-      return $resource('/api/addresses');
+      return $resource('/api/addresses/');
     }
   ]);
 

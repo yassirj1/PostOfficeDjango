@@ -11,11 +11,9 @@
 {% verbatim %}
     <div class="panel" ng-repeat="address in addresses">
         <div class="panel-heading clearfix">
-            <h3 class="panel-title">{{ address.streetline1 }}</h3>
-            <author class="pull-right">{{ address.streetline3 }}</author>
-        </div>
-        <p class="well">{{ address.streetline2 }}</p>
-    </div>
+            <h3 class="panel-title">{{ address.street_line1 }} {{address.city}} {{address.state}} {{address.zipcode}} {{address.country}} </h3>
+
+   `
 {% endverbatim %}
 {% endblock %}</div>
 <script src="{% static "underscore/underscore.js" %}"></script>

@@ -1,8 +1,8 @@
 app = angular.module 'PostOffice.api', ['ngResource']
 
-app.factory 'Address', ['$resource', ($resource) ->
-    $resource '/api/addresses/:address_id', address_id: '@address_id'
-]
+# app.factory 'Address', ['$resource', ($resource) ->
+#     $resource '/api/addresses/:address_id', address_id: '@address_id'
+# ]
 
 app.factory 'Shipments', ['$resource', ($resource) ->
     $resource '/api/shipments/:shipment_id', shipment_id: '@shipment_id'
@@ -12,8 +12,8 @@ app.factory 'Customer', ['$resource', ($resource) ->
     $resource '/api/customer/:customer_id', customer_id: '@customer_id'
 ]
 
-app.factory 'AllAddress', ['$resource', ($resource) ->
-	$resource '/api/addresses'
+app.factory 'Address', ['$resource', ($resource) ->
+	$resource '/api/addresses/'
 ]
 
 # app.factory ''
