@@ -1,7 +1,7 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.static', []);
+  app = angular.module('PostOffice.app.addresses', []);
 
   app.controller('AppController', [
     '$scope', '$http', function($scope, $http) {
@@ -12,6 +12,19 @@
           streetline3: '3'
         }
       ];
+    }
+  ]);
+
+}).call(this);
+
+(function() {
+  var app;
+
+  app = angular.module('PostOffice.app.Customer', ['PostOffice.api']);
+
+  app.controller('AppController', [
+    '$scope', 'Customer', function($scope, Customer) {
+      return $scope.customers = Customer.query();
     }
   ]);
 
