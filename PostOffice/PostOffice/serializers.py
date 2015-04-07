@@ -34,7 +34,7 @@ class DriverSerializer(serializers.ModelSerializer):
         'drug_test_passed')
 
 class DeliveryRoutesSerializer(serializers.ModelSerializer):
-    driver_id = DriverSerializer(many=True)
+    driver_id = DriverSerializer()
     class Meta:
         model = Delivery_Routes
         fields = ('delivery_route_id', 'zipcode', 'shipments_carried', 'driver_id', 'time_left', 'time_returned', 'last_location')

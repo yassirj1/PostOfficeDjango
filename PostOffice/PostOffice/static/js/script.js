@@ -19,11 +19,16 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.customer', ['PostOffice.api']);
+  app = angular.module('PostOffice.app.customer', []);
 
   app.controller('AppController', [
-    '$scope', 'Customer', function($scope, Customer) {
-      return $scope.customers = Customer.query();
+    '$scope', '$http', function($scope, $http) {
+      $scope.customers = [];
+      return $http.get('/api/customers/').then(function(result) {
+        return angular.forEach(result.data, function(item) {
+          return $scope.addresses.push(item);
+        });
+      });
     }
   ]);
 
@@ -32,11 +37,16 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.deliveryroutes', ['PostOffice.api']);
+  app = angular.module('PostOffice.app.deliveryroutes', []);
 
   app.controller('AppController', [
-    '$scope', 'Delivery_Routes', function($scope, Delivery_Routes) {
-      return $scope.delivery_routes = Delivery_Routes.query();
+    '$scope', '$http', function($scope, $http) {
+      $scope.deliveryroutes = [];
+      return $http.get('/api/deliveryroutes/').then(function(result) {
+        return angular.forEach(result.data, function(item) {
+          return $scope.addresses.push(item);
+        });
+      });
     }
   ]);
 
@@ -45,11 +55,16 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.driver', ['PostOffice.api']);
+  app = angular.module('PostOffice.app.driver', []);
 
   app.controller('AppController', [
-    '$scope', 'Driver', function($scope, Driver) {
-      return $scope.driver = Driver.query();
+    '$scope', '$http', function($scope, $http) {
+      $scope.drivers = [];
+      return $http.get('/api/drivers/').then(function(result) {
+        return angular.forEach(result.data, function(item) {
+          return $scope.addresses.push(item);
+        });
+      });
     }
   ]);
 
@@ -58,11 +73,16 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.incomingshipments', ['PostOffice.api']);
+  app = angular.module('PostOffice.app.incomingshipments', []);
 
   app.controller('AppController', [
-    '$scope', 'Incoming_Shipments', function($scope, Incoming_Shipments) {
-      return $scope.incoming_shipments = Incoming_Shipments.query();
+    '$scope', '$http', function($scope, $http) {
+      $scope.incomingshipment = [];
+      return $http.get('/api/incomingshipments/').then(function(result) {
+        return angular.forEach(result.data, function(item) {
+          return $scope.addresses.push(item);
+        });
+      });
     }
   ]);
 
@@ -71,11 +91,16 @@
 (function() {
   var app;
 
-  app = angular.module('PostOffice.app.shipment', ['PostOffice.api']);
+  app = angular.module('PostOffice.app.shipments', []);
 
   app.controller('AppController', [
-    '$scope', 'Shipment', function($scipe, Shipment) {
-      return $scope.shipment = Shipment.query();
+    '$scope', '$http', function($scope, $http) {
+      $scope.shipments = [];
+      return $http.get('/api/shipments/').then(function(result) {
+        return angular.forEach(result.data, function(item) {
+          return $scope.addresses.push(item);
+        });
+      });
     }
   ]);
 

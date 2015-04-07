@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block ng_app %}PostOffice.app.Delivery_Routes{% endblock %}
+{% block ng_app %}PostOffice.app.deliveryroutes{% endblock %}
 
 {% block content %}
 {% verbatim %}
-    <div class="panel" ng-repeat="delivery_routes in delivery_routes">
+    <div class="panel" ng-repeat="delivery_routes in deliveryroutes">
         <div class="panel-heading clearfix">
             <h3 class="panel-title">{{ delivery_routes.delivery_route_id }} {{delivery_routes.zipcode}} {{delivery_routes.shipments_carried}} {{delivery_routes.driver_id}} {{delivery_routes.time_left}} {{delivery_routes.time_returned}} {{delivery_routes.last_location}} </h3>
 	</div>

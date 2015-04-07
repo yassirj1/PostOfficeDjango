@@ -1,5 +1,8 @@
-app = angular.module 'PostOffice.app.incomingshipments', ['PostOffice.api']
+app = angular.module 'PostOffice.app.incomingshipments', []
 
-app.controller 'AppController', ['$scope', 'Incoming_Shipments', ($scope, Incoming_Shipments) ->
-	$scope.incoming_shipments = Incoming_Shipments.query()
+app.controller 'AppController', ['$scope', '$http', ($scope, $http) ->
+    $scope.incomingshipment = []
+    $http.get('/api/incomingshipments/').then (result) ->
+        angular.forEach result.data, (item) ->
+            $scope.addresses.push item
 ]

@@ -1,7 +1,24 @@
-{% extends 'base.html' %}
+{% load staticfiles %}
 
-{% block ng_app %}PostOffice.app.addresses{% endblock %}
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{% static "bootstrap/dist/css/bootstrap.css" %}">
+<center><h1> Uma's Postal Service</h1>
+<h3>Please enter a tracking number</h3></center>
+</head>
+<body style="background-color:#F4F2D0" ng-app="PostOffice.app.shipments">
+<div class="content" ng-controller="{% block ng_controller %}AppController{% endblock %}">{% block content %}
 
+{% endblock %}</div>
+<script src="{% static "underscore/underscore.js" %}"></script>
+<script src="{% static "angular/angular.js" %}"></script>
+<script src="{% static "angular-resource/angular-resource.js" %}"></script>
+<script src="{% static "js/script.js" %}"></script>
+</body>
+</html>
+
+
+<!--
 {% load url from future %}
 
 <h2>Shipments<h2>
@@ -35,4 +52,5 @@
         </li>
     {% endfor %}
 </ul> 
+-->
 
