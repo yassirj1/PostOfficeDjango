@@ -80,6 +80,18 @@ class Incoming_Shipments(models.Model):
 	def __unicode__(self):
    	    return '{} {}'.format(self.route_id, self.post_office_shipping_from, self.post_office_shipping_to , self.route_type )
 
+
+class Employee_Manager(models.Manager):
+	pass
+
+class Employee(models.Model):
+	objects = Employee_Manager()
+	employee_id = models.AutoField(primary_key=True)
+	employee_ssn = models.IntegerField(max_length=9)
+	employee_email = models.EmailField(max_length=75)
+	employee_post_office = models.ForeignKey(Post_Office,related_name="EmployeePostOffice")
+
+
 class Customer_Manager(models.Manager):
 	pass
 
@@ -89,7 +101,7 @@ class Customer(models.Model):
 	phone_number = models.IntegerField(max_length=10)
 	first_name = models.CharField(max_length=25)
 	last_name = models.CharField(max_length=25)
-	customer_email = models.CharField(max_length=50)
+	customer_email = models.EmailField(max_length=75)
 	date_joined = models.DateField()
 
 	def __unicode__(self):

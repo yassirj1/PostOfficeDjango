@@ -17,20 +17,66 @@
 }).call(this);
 
 (function() {
-  var app;
-
-  app = angular.module('PostOffice.app.customer', []);
-
-  app.controller('AppController', [
-    '$scope', '$http', function($scope, $http) {
-      $scope.customers = [];
-      return $http.get('/api/customers/').then(function(result) {
-        return angular.forEach(result.data, function(item) {
-          return $scope.addresses.push(item);
-        });
-      });
+  angular.module('PostOffice', ['ngResource']).config([
+    '$httpProvider', function($httpProvider) {
+      $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+      $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     }
-  ]);
+  ]).service('authState', function() {
+    return {
+      user: void 0
+    };
+  }).factory('api', function($resource) {
+    var add_auth_header;
+    add_auth_header = function(data, headersGetter) {
+      var headers;
+      headers = headersGetter();
+      headers['Authorization'] = 'Basic ' + btoa(data.username + ':' + data.password);
+    };
+    return {
+      auth: $resource('/api/auth\\/', {}, {
+        login: {
+          method: 'POST',
+          transformRequest: add_auth_header
+        },
+        logout: {
+          method: 'DELETE'
+        }
+      }),
+      users: $resource('/api/users\\/', {}, {
+        create: {
+          method: 'POST'
+        }
+      })
+    };
+  }).controller('authController', function($scope, api, authState) {
+    $('#id_auth_form input').checkAndTriggerAutoFillEvent();
+    $scope.authState = authState;
+    $scope.getCredentials = function() {
+      return {
+        username: $scope.username,
+        password: $scope.password
+      };
+    };
+    $scope.login = function() {
+      api.auth.login($scope.getCredentials()).$promise.then(function(data) {
+        authState.user = data.username;
+      })["catch"](function(data) {
+        alert(data.data.detail);
+      });
+    };
+    $scope.logout = function() {
+      api.auth.logout(function() {
+        authState.user = void 0;
+      });
+    };
+    $scope.register = function($event) {
+      $event.preventDefault();
+      api.users.create($scope.getCredentials()).$promise.then($scope.login)["catch"](function(data) {
+        alert(data.data.username);
+      });
+    };
+  });
 
 }).call(this);
 
