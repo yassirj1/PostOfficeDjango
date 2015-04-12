@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+from django.contrib.auth.models import User
 from PostOffice.models import (
     Shipments,
     Customer,
@@ -8,6 +8,8 @@ from PostOffice.models import (
     Driver,
     Incoming_Shipments
 )
+
+
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:

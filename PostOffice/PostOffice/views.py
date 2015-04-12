@@ -1,11 +1,10 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
-from rest_framework import generics
+from rest_framework import generics, permissions
 from django.views.generic import TemplateView
 from django.conf import settings
 from PostOffice.models import Address, Shipments, Customer, Driver, Incoming_Shipments, Delivery_Routes
-
+from django.contrib.auth.models import User
 from PostOffice.serializers import AddressSerializer, ShipmentsSerializer, CustomerSerializer, DriverSerializer, IncomingShipmentsSerializer, DeliveryRoutesSerializer
-
 class SimpleStaticView(TemplateView):
     def get_template_names(self):
         return [self.kwargs.get('template_name') + ".html"]

@@ -11,7 +11,7 @@
     <meta name="author" content="">
 
     <title>Simple Sidebar - Start Bootstrap Template</title>
-
+    <base href="/" />
     <!-- Bootstrap Core CSS -->
     <link href="{% static "bootstrap/dist/css/bootstrap.css" %}" rel="stylesheet">
 
@@ -24,30 +24,24 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<div class="navbar navbar-default navbar-fixed-top" style="background:black" ng-controller="authController" ng-init="authState.user='{{user.username}}'">
-    <div id="logout_user" ng-show="authState.user" class="navbar-form navbar-right">
-        <input type="submit" class="btn btn-default" ng-click="logout()" value="logout {{authState.user}}"/>
-    </div>
-    <div ng-hide="authState.user">
-        <form id="id_auth_form" class="navbar-form navbar-right" ng-submit="login()">
-            <div class="form-group">
-                <input ng-model="username" required name="username" type="text" placeholder="username" class="form-control">
-            </div>
-            <div class="form-group">
-                <input ng-model="password" required name="password" type="password" placeholder="password" class="form-control">
-            </div>
-            <div class="btn-group">
-                <input type="submit" class="btn btn-default" value="login">
-                <input type="submit" class="btn btn-default" value="register" ng-click="register($event)">
-            </div>
-        </form>
-    </div>
-</div>
+
+
+
 
 </head>
 
-<body>
-    
+<body ng-app="angularDjangoRegistrationAuthApp" ng-controller="MasterCtrl">
+    <div class="container">
+        <div class="header">
+          <ul class="nav nav-pills pull-right">
+            <li class="active"><a ng-href="#/">Home</a></li>
+          </ul>
+          <h3 class="text-muted">Angular Django Registration Auth Demo</h3>
+        </div>
+
+        <!-- Add your site or application content here -->
+        <div ng-view=""></div>
+    </div>
     
 
     <div id="wrapper">
@@ -109,11 +103,13 @@
 
     <!-- jQuery -->
     <script src="{% static "jquery/dist/jquery.js" %}"></script>
-    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "angular/angular.js" %}"></script>
     <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
     <script src="{% static "underscore/underscore.js" %}"></script>
-	<script src="{% static "angular/angular.js" %}"></script>
-	<script src="{% static "angular-resource/angular-resource.js" %}"></script>
+    <script src="{% static "angular-resource/angular-resource.js" %}"></script>
+    <script src="{% static "angular-cookies/angular-cookies.js" %}"></script>
+    <script src="{% static "angular-sanitize/angular-sanitize.js" %}"></script>
+    <script src="{% static "angular-route/angular-route.js" %}"></script>
 	<script src="{% static "js/script.js" %}"></script>
     <!-- Menu Toggle Script -->
     <script>
@@ -121,6 +117,15 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+    </script>
+    <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
     </script>
 
 

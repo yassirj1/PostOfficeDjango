@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
 from django.contrib import admin
 from rest_framework.urlpatterns import format_suffix_patterns
 from django.conf import settings
@@ -31,5 +32,6 @@ urlpatterns = patterns(
 	url(r'^incomingshipments/$', views.IncomingShipmentsView.as_view(), name='incomingshipment-list'),
     url(r'^incomingshipments/(?P<pk>[\d]+)/$', views.IncomingShipmentsInstanceView.as_view(), name = 'incomingshipment-instance'),
 
-   
+    
+
 )

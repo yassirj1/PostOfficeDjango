@@ -97,6 +97,12 @@
     background: none;
 }
 
+.login_box {
+    padding-right: 15px;
+    padding-left: 15px;
+
+}
+
 .navbar {
     border-top: 1px dotted #dedede;
     background: #dedede;
