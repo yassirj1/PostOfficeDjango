@@ -6,6 +6,7 @@
 
 /* Toggle Styles */
 
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -103,6 +104,8 @@
 
 }
 
+
+
 .navbar {
     border-top: 1px dotted #dedede;
     background: #dedede;
@@ -124,7 +127,6 @@ h1 {
 h6 {
     color: gray;
 }
-
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;
@@ -151,4 +153,6 @@ h6 {
         position: relative;
         margin-right: 0;
     }
+
+
 }

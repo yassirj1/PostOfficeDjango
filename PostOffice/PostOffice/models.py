@@ -46,6 +46,7 @@ class State_Manager(models.Manager):
 	pass
 
 class State(models.Model):
+	objects = State_Manager()
 	state_code = models.IntegerField(max_length=2,primary_key=True)
 	state_long = models.CharField(max_length=40)
 
