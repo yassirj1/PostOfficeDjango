@@ -1,54 +1,98 @@
 from django.db import models
 
-class Post_Office_Manager(models.Manager):
-	pass
+POST_OFFICE_SHIPPED_FROM = (
+		(77025, "Houston"),
+		(75032, "Dallas"),
+  		(78721, "Austin"),
+  		(78205, "San Antonio"),
+  		(79922, "El Paso"),
+  	)
 
-class Post_Office(models.Model):
-	zipcode = models.IntegerField(max_length=5,primary_key=True)
-	city = models.CharField(max_length=40)
+PACKAGE_TYPE = (
+  		(1, 'One Day'),
+  		(2, 'Two Day'),
+  		(3, 'Three Day'),
+  		(4, 'Ground'),
+  		(5, 'Freight'),
+  	)
 
-class Package_Type_Manager(models.Manager):
-	pass
+SHIPMENT_TYPE = (
+  		(1, 'Ground'),
+  		(2, 'Air'),
+  		(3, 'Sea'),
+  	)
 
-class Package_Type(models.Model):
-	package_code = models.IntegerField(max_length=5,primary_key=True)
-	package = models.CharField(max_length=40)
+DELIVERY_STATUS = (
+  		(1, 'Enroute'),
+  		(2, 'Completed'),
+  		(3, 'Returned'),
+  		(4, 'Damaged')
+  	)
 
-class Shipment_Type_Manager(models.Manager):
-	pass
+ORDER_STATUS = (
+  		(1, 'Pending'),
+  		(2,'Delivered'),
+  		(3, 'Cancelled')
+  	)
 
-class Shipment_Type(models.Model):
-	shipment_code = models.IntegerField(max_length=5,primary_key=True)
-	shipment_is = models.CharField(max_length=40)
+COUNTRY_CODE = (
+  		(1, 'USA'),
+  		(2, 'Canada'),
+  		(3, 'Mexico'),
+  	)
 
-class Delivery_Status_Manager(models.Manager):
-	pass
-
-class Delivery_Status(models.Model):
-	delivery_short = models.CharField(max_length=2,primary_key=True)
-	delivery_stat = models.CharField(max_length=40)
-
-class Order_StatusManager(models.Manager):
-	pass
-
-class Order_Status(models.Model):
-	order_short = models.CharField(max_length=2,primary_key=True)
-	order_stat = models.CharField(max_length=40)
-
-class Country_Manager(models.Manager):
-	pass
-
-class Country(models.Model):
-	country_short = models.CharField(max_length=2,primary_key=True)
-	country_long = models.CharField(max_length=40)
-
-class State_Manager(models.Manager):
-	pass
-
-class State(models.Model):
-	objects = State_Manager()
-	state_code = models.IntegerField(max_length=2,primary_key=True)
-	state_long = models.CharField(max_length=40)
+STATE_CODE = (
+  		(0, 'Alabama'),
+  		(1, 'Alaska'),
+  		(2, 'Arizona'),
+  		(3, 'Arkansas'),
+  		(4, 'California'),
+  		(5, 'Colorado'),
+  		(6, 'Connecticut'),
+  		(7, 'Delaware'),
+  		(8, 'Florida'), 
+  		(9, 'Georgia'),
+  		(10, 'Hawaii'), 
+  		(11, 'Idaho'), 
+  		(12, 'Illinois'), 
+  		(13, 'Indiana'), 
+  		(14, 'Iowa'), 
+  		(15, 'Kansas'), 
+  		(16, 'Kentucky'), 
+  		(17, 'Louisiana'), 
+  		(18, 'Maine'), 
+  		(19, 'Maryland'), 
+  		(20, 'Massachusetts'), 
+  		(21, 'Michigan'), 
+  		(22, 'Minnesota'), 
+  		(23, 'Mississippi'), 
+  		(24, 'Missouri'), 
+  		(25, 'Montana'), 
+  		(26, 'Nebraska'), 
+  		(27, 'Nevada'), 
+  		(28, 'New Hampshire'), 
+  		(29, 'New Jersey'), 
+  		(30, 'New Mexico'), 
+  		(31, 'New York'), 
+  		(32, 'North Carolina'), 
+  		(33, 'North Dakota'), 
+  		(34, 'Ohio'), 
+  		(35, 'Oklahoma'), 
+  		(36, 'Oregon'), 
+  		(37, 'Pennsylvania'), 
+  		(38, 'Rhode Island'), 
+  		(39, 'South Carolina'), 
+  		(40, 'South Dakota'), 
+  		(41, 'Tennessee'), 
+  		(42, 'Texas'), 
+  		(43, 'Utah'), 
+  		(44, 'Vermont'), 
+  		(45, 'Virginia'), 
+  		(46, 'Washington'), 
+  		(47, 'West Virginia'), 
+  		(48, 'Wisconsin'), 
+  		(49, 'Wyoming')
+  	) 
 
 class Address_Manager(models.Manager):
     pass
@@ -61,8 +105,8 @@ class Address(models.Model):
 	street_line3 = models.CharField(max_length=50)
 	street_line4 = models.CharField(max_length=50)
 	city = models.CharField(max_length=20)
-	state = models.ForeignKey(State, related_name="State")
-	country = models.ForeignKey(Country, related_name="Country")
+	state = models.IntegerField(choices=STATE_CODE, default=42)
+	country = models.IntegerField(choices=COUNTRY_CODE, default=1)
 	zipcode = models.IntegerField(max_length=5)
 
 	def __unicode__(self):
@@ -74,24 +118,12 @@ class Incoming_Shipments_Manager(models.Manager):
 class Incoming_Shipments(models.Model):
 	objects = Incoming_Shipments_Manager()
 	route_id = models.IntegerField(max_length=10, primary_key=True)
-	post_office_shipping_from = models.ForeignKey(Post_Office, related_name = "PO_From")
-	post_office_shipping_to = models.ForeignKey(Post_Office, related_name = "POTo")
-	route_type = models.ForeignKey(Shipment_Type, related_name = "ShipmentType")
+	post_office_shipping_from = models.IntegerField(choices=POST_OFFICE_SHIPPED_FROM, default=77025)
+	post_office_shipping_to = models.IntegerField(choices=POST_OFFICE_SHIPPED_FROM, default=75032)
+	route_type = models.IntegerField(choices=SHIPMENT_TYPE, default=1)
 
 	def __unicode__(self):
    	    return '{} {}'.format(self.route_id, self.post_office_shipping_from, self.post_office_shipping_to , self.route_type )
-
-
-class Employee_Manager(models.Manager):
-	pass
-
-class Employee(models.Model):
-	objects = Employee_Manager()
-	employee_id = models.AutoField(primary_key=True)
-	employee_ssn = models.IntegerField(max_length=9)
-	employee_email = models.EmailField(max_length=75)
-	employee_post_office = models.ForeignKey(Post_Office,related_name="EmployeePostOffice")
-
 
 class Customer_Manager(models.Manager):
 	pass
@@ -120,13 +152,13 @@ class Shipments(models.Model):
 	time_shipped = models.DateTimeField()
 	reciever_address = models.ForeignKey(Address, related_name = "ShipmentAddress")
 	receiver_name = models.CharField(max_length=200)
-	post_office_shipped_from = models.ForeignKey(Post_Office, related_name = "POFrom")
+	post_office_shipped_from = models.IntegerField(choices=POST_OFFICE_SHIPPED_FROM, default=77025)
 	date_ship = models.DateField()
 	est_arrival = models.DateField()
-	last_post_office = models.ForeignKey(Post_Office, related_name="POLast" )
-	order_status = models.ForeignKey(Order_Status, related_name= "OrderStatus")
-	delivery_status = models.ForeignKey(Delivery_Status,related_name="DeliveryStatus")
-	package_type = models.ForeignKey(Package_Type, related_name="PackageType")
+	last_post_office = models.IntegerField(choices=POST_OFFICE_SHIPPED_FROM, default=75032)
+	order_status = models.IntegerField(choices=ORDER_STATUS, default=1)
+	delivery_status = models.IntegerField(choices=DELIVERY_STATUS, default=1)
+	package_type = models.IntegerField(choices=PACKAGE_TYPE, default=3)
 	package_weight = models.IntegerField(max_length=5)
 	package_rate = models.IntegerField(max_length=5)
 	signature_required = models.BooleanField(default=None)
