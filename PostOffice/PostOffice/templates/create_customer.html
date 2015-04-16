@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
-<head>
+
+
+<head>  
 <meta charset="UTF-8">
-<title>Example of Bootstrap 3 Prepended and Appended Inputs</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -14,14 +16,11 @@
 </style>
 </head>
 <body>
-<div class="bs-example">
-	<form>
+<form>
         <div class="row">
             <div class="col-md-8">
-                <div class="input-group">
-                </div>
-            </div>
-        </div>
+                
+           
         <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-user">			</span></span>
             <label class="col-md-8 control-label">FIRST NAME</label>
@@ -31,8 +30,7 @@
             <input type="text" class="form-control" placeholder="LAST NAME">
         </div>
         <br>
-        <label class="col-lg-2 col-md-2 col-sm-8 col-xs-6">
-        <div class= "row">
+        
         <label class="col-lg-4 control-label">PHONE NUMBER</label>
             <input type="int" class="form-control" placeholder="PHONE NUMBER">
         <br>
@@ -44,11 +42,10 @@
         <br>
         <label class="col-md-8 control-label">ADDRESS 2</label>
             <input type="text" class="form-control" placeholder="ADDRESS 2">
-            </div>
+            
         <br>
-    	<label class="col-lg-2 col-md-2 col-sm-8 col-xs-6">
-        <label class="col-sm-2 control-label">STATE</label>
-        <select name="state" class="col-md-2 form-control">
+    	<label class="control-label">STATE</label>
+        <select name="state" class="form-control">
             <option value="AL">AL</option>
             <option value="AK">AK</option>
             <option value="AZ">AZ</option>
@@ -110,7 +107,9 @@
         <br>
                
         <a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-user"></span> CREATE</a>
-    </form>
+	 </div>
+        </div>
+    </form> 
 
 </body>
 </html>                                		
