@@ -94,23 +94,6 @@ STATE_CODE = (
   		(49, 'Wyoming')
   	) 
 
-class Address_Manager(models.Manager):
-    pass
-
-class Address(models.Model):
-	objects = Address_Manager()
-	address_id = models.AutoField(max_length=10,primary_key=True)
-	street_line1 = models.CharField(max_length=50)
-	street_line2 = models.CharField(max_length=50)
-	street_line3 = models.CharField(max_length=50)
-	street_line4 = models.CharField(max_length=50)
-	city = models.CharField(max_length=20)
-	state = models.IntegerField(choices=STATE_CODE, default=42)
-	country = models.IntegerField(choices=COUNTRY_CODE, default=1)
-	zipcode = models.IntegerField(max_length=5)
-
-	def __unicode__(self):
-   	    return '{} {}'.format(self.street_line1, self.street_line2, self.street_line3 , self.street_line4 , self.city , self.state, self.country , self.zipcode)
 
 class Incoming_Shipments_Manager(models.Manager):
 	pass
@@ -140,6 +123,26 @@ class Customer(models.Model):
 	def __unicode__(self):
    	    return '{} {}'.format(self.customer_id, self.phone_number, self.first_name ,
         	self.last_name , self.customer_email , self.date_joined)
+
+class Address_Manager(models.Manager):
+    pass
+
+class Address(models.Model):
+	objects = Address_Manager()
+	address_id = models.AutoField(max_length=10,primary_key=True)
+	customer_id = models.ForeignKey(Customer, related_name="CustomerAddress")
+	street_line1 = models.CharField(max_length=50)
+	street_line2 = models.CharField(max_length=50)
+	street_line3 = models.CharField(max_length=50)
+	street_line4 = models.CharField(max_length=50)
+	city = models.CharField(max_length=20)
+	state = models.IntegerField(choices=STATE_CODE, default=42)
+	country = models.IntegerField(choices=COUNTRY_CODE, default=1)
+	zipcode = models.IntegerField(max_length=5)
+
+	def __unicode__(self):
+   	    return '{} {}'.format(self.street_line1, self.street_line2, self.street_line3 , self.street_line4 , self.city , self.state, self.country , self.zipcode)
+
 
 class Shipments_Manager(models.Manager):
 	pass
