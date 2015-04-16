@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+
+<head>  
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> 
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<form>
+        <div class="row">
+            <div class="col-md-8">
+           <label class="col-lg-8 control-label">NEW DRIVER INFORMATION</label>     
+             <hr>   
+           
+        <div class="input-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user">			</span></span>
+            <label class="col-md-8 control-label">FULL NAME</label>
+            <input type="text" class="form-control" placeholder="FULL NAME">
+        <br>
+                </div>
+        <br>
+        <label class="col-lg-4 control-label">PHONE NUMBER</label>
+            <input type="int" class="form-control" placeholder="PHONE NUMBER">
+        <br>
+        <label class="col-md-8 control-label">SSN</label>
+            <input type="text" class="form-control" placeholder="SOCIAL SECURITY NUMBER">
+        <br>
+    	<label class="control-label">DRUG TEST CLEARED</label>
+        <select name="state" class="form-control">
+            <option value="TRUE">YES</option>
+            <option value="FALSE">NO</option>
+            
+        </select>
+		<br>
+               
+        <a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-user"></span> CREATE</a>
+	 </div>
+        </div>
+    </form> 
+
+</body>
+</html>                                		
