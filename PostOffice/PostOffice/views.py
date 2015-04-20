@@ -1,10 +1,13 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from django.views.generic import TemplateView
 from django.conf import settings
 from PostOffice.models import Address, Shipments, Customer, Driver, Incoming_Shipments, Delivery_Routes
 from django.contrib.auth.models import User
-from PostOffice.serializers import AddressSerializer, ShipmentsSerializer, CustomerSerializer, DriverSerializer, IncomingShipmentsSerializer, DeliveryRoutesSerializer
+from PostOffice.serializers import AddressOutputSerializer, AddressInputSerializer, ShipmentsInputSerializer, ShipmentsOutputSerializer, CustomerSerializer, DriverSerializer, IncomingShipmentsSerializer, DeliveryRoutesSerializer
+from rest_framework.response import Response
+
+
 class SimpleStaticView(TemplateView):
     def get_template_names(self):
         return [self.kwargs.get('template_name') + ".html"]
@@ -23,12 +26,15 @@ def index_view(request):
     return render(request, 'base.html', response)
 
 class AddressView(generics.ListCreateAPIView):
-    """
-    Returns a list of all Addresses.
-    """
-    queryset = Address.objects.all()
     model = Address
-    serializer_class = AddressSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AddressInputSerializer
+        return AddressOutputSerializer
+
+    def get_queryset(self):
+        return Address.objects.all()
     
 
 class AddressInstanceView(generics.RetrieveAPIView):
@@ -38,15 +44,18 @@ class AddressInstanceView(generics.RetrieveAPIView):
     """
     queryset = Address.objects.all()
     model = Address
-    serializer_class = AddressSerializer
+    serializer_class = AddressOutputSerializer
 
 class ShipmentsView(generics.ListCreateAPIView):
-    """
-    Returns a list of all Addresses.
-    """
-    queryset = Shipments.objects.all()
     model = Shipments
-    serializer_class = ShipmentsSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ShipmentsInputSerializer
+        return ShipmentsOutputSerializer
+
+    def get_queryset(self):
+        return Shipments.objects.all()
 
 class ShipmentsInstanceView(generics.RetrieveAPIView):
     """
@@ -55,7 +64,8 @@ class ShipmentsInstanceView(generics.RetrieveAPIView):
     """
     queryset = Shipments.objects.all()
     model = Shipments
-    serializer_class = ShipmentsSerializer
+    serializer_class = ShipmentsOutputSerializer
+
 class CustomerView(generics.ListCreateAPIView):
 	"""
 	Returns a list of all Customers
