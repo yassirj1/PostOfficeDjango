@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DB Postal Service</title>
+    <title>Reports</title>
     <base href="/" />
     <!-- Bootstrap Core CSS -->
     <link href="{% static "bootstrap/dist/css/bootstrap.css" %}" rel="stylesheet">
@@ -64,14 +64,22 @@
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div ng-show="authenticated" id="page-content-wrapper">
 
         <div class="row">
             <div class="col-lg-12">
             <div ng-module="postOfficeApp">
-            <a href="#/tracking" class="btn btn-primary">Track</a>
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            <h1>insert your reports code here</h1>
             </div>
+            </div>
+        </div>
+    </div>
+    <div ng-hide="authenticated" id="page-content-wrapper">
+
+        <div class="row">
+            <div class="col-lg-12">
+            <h1>Please Log In</h1>
+            <a href"#" class="btn btn-primary">Return Home</a>
             </div>
         </div>
     </div>

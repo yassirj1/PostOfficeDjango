@@ -1,12 +1,9 @@
-var app = angular.module('PostOffice.app.addresses', []);
+'use strict';
 
-app.controller('AppController', [
-  '$scope', '$http', function($scope, $http) {
-    $scope.addresses = [];
-    return $http.get('/api/addresses/').then(function(result) {
-      return angular.forEach(result.data, function(item) {
-        return $scope.addresses.push(item);
-      });
-    });
-  }
-]);
+var postOfficeControllers = angular.module('postOfficeControllers', [] );
+
+postOfficeControllers.controller('trackingCtrl', ['$scope', 'Shipments' , 
+	function ($scope,Shipments) {
+		$scope.shipments = Shipments;
+	}
+])

@@ -1,0 +1,9 @@
+<input type="text" ng-model="search.tracking_number">
+<div ng-controller="trackingCtrl">
+	<table>
+		<tr ng-repeat="shipment in shipments | filter:search.tracking_number">
+			<td>{{shipment.tracking_number}}</td>
+			<td>{{shipment.est_arrival}}</td>
+		</tr>
+	</table>
+</div>

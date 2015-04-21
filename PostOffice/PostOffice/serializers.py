@@ -41,8 +41,6 @@ class ShipmentsInputSerializer(serializers.ModelSerializer):
         model = Shipments
         fields = ('shipment_id', 'tracking_number', 'customer_id', 'time_shipped', 'reciever_address', 'receiver_name', 'post_office_shipped_from','date_ship', 'est_arrival', 'last_post_office', 'order_status', 'delivery_status', 'package_type', 'package_weight', 'package_rate', 'signature_required', 'signature_confirmed')
 
-
-
 class DriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = Driver

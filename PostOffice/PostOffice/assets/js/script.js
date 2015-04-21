@@ -1,39 +1,3 @@
-var app = angular.module('PostOffice.app.addresses', []);
-
-app.controller('AppController', [
-  '$scope', '$http', function($scope, $http) {
-    $scope.addresses = [];
-    return $http.get('/api/addresses/').then(function(result) {
-      return angular.forEach(result.data, function(item) {
-        return $scope.addresses.push(item);
-      });
-    });
-  }
-]);
-
-var app = angular.module('PostOffice.api', ['ngResource']);
-
-app.factory('Shipments', [
-  '$resource', function($resource) {
-    return $resource('/api/shipments/:shipment_id', {
-      shipment_id: '@shipment_id'
-    });
-  }
-]);
-
-app.factory('Customer', [
-  '$resource', function($resource) {
-    return $resource('/api/customer/:customer_id', {
-      customer_id: '@customer_id'
-    });
-  }
-]);
-
-app.factory('Address', [
-  '$resource', function($resource) {
-    return $resource('/api/addresses/');
-  }
-]);
 'use strict';
 
 angular.module('angularDjangoRegistrationAuthApp', [
