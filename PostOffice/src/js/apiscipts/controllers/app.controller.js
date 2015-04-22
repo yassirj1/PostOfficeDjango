@@ -1,9 +1,11 @@
 'use strict';
 
-var postOfficeControllers = angular.module('postOfficeControllers', [] );
+angular.module('postOfficeApp')
+.controller('trackingCtrl', [ '$scope', 'poService' , function ($scope,poService) {
+		$scope.shipments = [];
 
-postOfficeControllers.controller('trackingCtrl', ['$scope', 'Shipments' , 
-	function ($scope,Shipments) {
-		$scope.shipments = Shipments;
+		poService.getShipments().success(function (response) {
+			$scope.shipments = response;
+		});
 	}
-])
+]);

@@ -1,5 +1,47 @@
 'use strict';
 
+angular.module('postOfficeApp', [
+	'ui.router',
+	'angularDjangoRegistrationAuthApp'
+	]);
+
+angular.module('postOfficeApp')
+.config(function ($stateProvider, $urlRouterProvider) {
+	$stateProvider
+		.state('home', {
+			url:'/',
+			templateUrl: 'static/views/partial-home.html'
+		})
+		.state('home.tracking', {
+			url: 'tracking',
+			templateUrl: 'static/views/tracking.html'
+			//controller: 'trackingCtrl'
+		});
+});
+'use strict';
+
+angular.module('postOfficeApp')
+.controller('trackingCtrl', [ '$scope', 'poService' , function ($scope,poService) {
+		$scope.shipments = [];
+
+		poService.getShipments().success(function (response) {
+			$scope.shipments = response;
+		});
+	}
+]);
+'use strict';
+angular.module('postOfficeApp')
+.factory('poService', ['$http', function($http) {
+	var poService = {};
+
+	poService.getShipments = function() {
+		return $http.get('api/shipments');
+	};
+
+	return poService;
+}]);
+'use strict';
+
 angular.module('angularDjangoRegistrationAuthApp', [
   'ngCookies',
   'ngResource',

@@ -1,20 +1,20 @@
 'use strict';
 
-var postOfficeApp = angular.module('postOfficeApp', [
-	'ngRoute',
-	'postOfficeControllers',
-	'postOfficeFilters',
-	'postOfficeServices'
+angular.module('postOfficeApp', [
+	'ui.router',
+	'angularDjangoRegistrationAuthApp'
 	]);
 
-postOfficeApp.config(['routeProvider',
-	function($routeProvider) {
-		$routeProvider.
-		when('/tracking', {
-			templateUrl: 'static/views/tracking.html',
-			controller: 'trackingCtrl'
-		}).
-		otherwise({
-			redirectTo: '/'
+angular.module('postOfficeApp')
+.config(function ($stateProvider, $urlRouterProvider) {
+	$stateProvider
+		.state('home', {
+			url:'/',
+			templateUrl: 'static/views/partial-home.html'
+		})
+		.state('home.tracking', {
+			url: 'tracking',
+			templateUrl: 'static/views/tracking.html'
+			//controller: 'trackingCtrl'
 		});
-	}]);
+});
