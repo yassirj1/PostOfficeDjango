@@ -14,7 +14,7 @@ angular.module('postOfficeApp')
 		})
 		.state('home.tracking', {
 			url: 'tracking',
-			templateUrl: 'static/views/tracking.html'
-			//controller: 'trackingCtrl'
+			templateUrl: 'static/views/tracker.html',
+			controller: 'trackingCtrl'
 		});
 });
