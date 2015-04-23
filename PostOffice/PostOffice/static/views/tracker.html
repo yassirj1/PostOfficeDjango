@@ -1,9 +1,15 @@
-<div class="container">
+
 <input type="text" ng-model="search.tracking_number">
-	<table>
+	<table class="table table-hover">
+		<caption>Tracking Data</caption>
+		<thead>
+			<tr>
+				<th class="col-xs-1">Tracking Number</th>
+				<th class="col-xs-1">Estimated Arrival</th>
+			</tr>
+		</thead>
 		<tr ng-repeat="shipment in shipments | filter:search.tracking_number">
 			<td>{{shipment.tracking_number}}</td>
 			<td>{{shipment.est_arrival}}</td>
 		</tr>
 	</table>
-</div>

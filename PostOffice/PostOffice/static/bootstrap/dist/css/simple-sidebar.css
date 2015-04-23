@@ -5,7 +5,9 @@
  */
 
 /* Toggle Styles */
-
+.table {
+    max-width: none;
+}
 
 #wrapper {
     padding-left: 0;
