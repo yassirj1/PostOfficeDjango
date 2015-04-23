@@ -29,6 +29,10 @@ angular.module('postOfficeApp')
 			url: '/manageshipments',
 			templateUrl: 'static/views/manageshipments.html'
 		})
+		.state('managecustomers', {
+			url:'/managecustomers',
+			templateUrl: 'static/views/managecustomers.html'
+		})
 		.state('reports', {
 			url: '/reports',
 			templateUrl: 'static/views/reports.html'
