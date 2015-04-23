@@ -37,7 +37,7 @@ class AddressView(generics.ListCreateAPIView):
         return Address.objects.all()
     
 
-class AddressInstanceView(generics.RetrieveAPIView):
+class AddressInstanceView(generics.RetrieveUpdateDestroyAPIView):
     """
     Returns a single author.
     Also allows updating and deleting
@@ -57,7 +57,7 @@ class ShipmentsView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Shipments.objects.all()
 
-class ShipmentsInstanceView(generics.RetrieveAPIView):
+class ShipmentsInstanceView(generics.RetrieveUpdateDestroyAPIView):
     """
     Returns a single author.
     Also allows updating and deleting
@@ -74,7 +74,7 @@ class CustomerView(generics.ListCreateAPIView):
 	model = Customer
 	serializer_class= CustomerSerializer
 
-class CustomerInstanceView(generics.RetrieveAPIView):
+class CustomerInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Customer.objects.all()
 	model = Customer
 	serializer_class = CustomerSerializer	
@@ -87,7 +87,7 @@ class IncomingShipmentsView(generics.ListCreateAPIView):
 	model = Incoming_Shipments
 	serializer_class= IncomingShipmentsSerializer
 
-class IncomingShipmentsInstanceView(generics.RetrieveAPIView):
+class IncomingShipmentsInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Incoming_Shipments.objects.all()
 	model = Incoming_Shipments
 	serializer_class = IncomingShipmentsSerializer
@@ -100,7 +100,7 @@ class DriverView(generics.ListCreateAPIView):
 	model = Driver
 	serializer_class= DriverSerializer
 
-class DriverInstanceView(generics.RetrieveAPIView):
+class DriverInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Driver.objects.all()
 	model = Driver
 	serializer_class = DriverSerializer
@@ -113,7 +113,7 @@ class DeliveryRoutesView(generics.ListCreateAPIView):
 	model = Delivery_Routes
 	serializer_class= DeliveryRoutesSerializer
 
-class DeliveryRoutesInstanceView(generics.RetrieveAPIView):
+class DeliveryRoutesInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Delivery_Routes.objects.all()
 	model = Delivery_Routes
 	serializer_class = DeliveryRoutesSerializer
