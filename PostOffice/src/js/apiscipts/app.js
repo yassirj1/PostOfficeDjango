@@ -2,6 +2,7 @@
 
 angular.module('postOfficeApp', [
 	'ui.router',
+	'ngTable',
 	'angularDjangoRegistrationAuthApp'
 	]);
 
@@ -31,7 +32,8 @@ angular.module('postOfficeApp')
 		})
 		.state('managecustomers', {
 			url:'/managecustomers',
-			templateUrl: 'static/views/managecustomers.html'
+			templateUrl: 'static/views/managecustomers.html',
+			controller: 'customerTableCtrl'
 		})
 		.state('reports', {
 			url: '/reports',

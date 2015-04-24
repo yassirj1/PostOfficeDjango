@@ -6,6 +6,10 @@
 
 /* Toggle Styles */
 
+.ng-table {
+    border: 1px solid #000;
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;

@@ -2,6 +2,7 @@
 
 angular.module('postOfficeApp', [
 	'ui.router',
+	'ngTable',
 	'angularDjangoRegistrationAuthApp'
 	]);
 
@@ -31,7 +32,8 @@ angular.module('postOfficeApp')
 		})
 		.state('managecustomers', {
 			url:'/managecustomers',
-			templateUrl: 'static/views/managecustomers.html'
+			templateUrl: 'static/views/managecustomers.html',
+			controller: 'customerTableCtrl'
 		})
 		.state('reports', {
 			url: '/reports',
@@ -43,20 +45,116 @@ angular.module('postOfficeApp')
 
 angular.module('postOfficeApp')
 .controller('trackingCtrl', [ '$scope', 'poService' , function ($scope,poService) {
-		$scope.shipments = [];
+	$scope.shipments = [];
 
-		poService.getShipments().success(function (response) {
-			$scope.shipments = response;
-		});
+	poService.getShipments().success(function (response) {
+		$scope.shipments = response;
+	});
+}]);
+
+angular.module('postOfficeApp')
+.controller('customerTableCtrl', [ '$scope', '$filter', 'ngTableParams', 'poService',  
+	function ($scope, $filter, ngTableParams, poService) {
+		var data = [];
+
+	poService.getCustomers().success( function (response) {
+		data = response;
+	});
+
+$scope.customers = data;
+
+$scope.tableParams = new ngTableParams({
+	page: 1,
+	count: 10
+},{
+	total: data.length,
+	getData: function($defer, params) {
+		var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+		$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 	}
-]);
+});
+
+$scope.editId = -1;
+
+$scope.setEditId =  function(pid) {
+	$scope.editId = pid;
+}
+}]);
 'use strict';
 angular.module('postOfficeApp')
 .factory('poService', ['$http', function($http) {
 	var poService = {};
 
+	poService.getAddresses = function() {
+		return $http.get('api/addresses');
+	};
+
+	poService.insertAddress = function(data) {
+		return $http.post('api/addresses', data);
+	};
+
+	poService.updateAddress = function(data) {
+		return $http.post('api/addresses'  + '/' + data.address_id, data)
+	};
+
 	poService.getShipments = function() {
 		return $http.get('api/shipments');
+	};
+
+	poService.insertShipments = function(data) {
+		return $http.post('api/shipments', data);
+	};
+
+	poService.updateShipments = function(data) {
+		return $http.post('api/shipments'  + '/' + data.shipment_id, data)
+	};
+
+	poService.getDrivers = function() {
+		return $http.get('api/drivers');
+	};
+
+	poService.insertDrivers = function(data) {
+		return $http.post('api/drivers', data);
+	};
+
+	poService.updateDrivers = function(data) {
+		return $http.post('api/drivers'  + '/' + data.driver_id, data)
+	};
+
+	poService.getCustomers = function() {
+		return $http.get('api/customers');
+	};
+
+	poService.insertCustomers = function(data) {
+		return $http.post('api/customers', data);
+	};
+
+	poService.updateCustomers = function(data) {
+		return $http.post('api/customers'  + '/' + data.customer_id, data)
+	};
+
+	poService.getDeliveryRoutes = function() {
+		return $http.get('api/deliveryroutes');
+	};
+
+	poService.insertDeliveryRoutes = function(data) {
+		return $http.post('api/deliveryroutes', data);
+	};
+
+	poService.updateDeliveryRoutes = function(data) {
+		return $http.post('api/deliveryroutes'  + '/' + data.delivery_route_id, data)
+	};
+
+	poService.getIncominingShipments = function() {
+		return $http.get('api/incomingshipments');
+	};
+
+	poService.insertIncomingShipments = function(data) {
+		return $http.post('api/incomingshipments', data);
+	};
+
+	poService.updateIncomingShipments = function(data) {
+		return $http.post('api/incomingshipments'  + '/' + data.route_id, data)
 	};
 
 	return poService;
