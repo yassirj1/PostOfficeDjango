@@ -1,0 +1,7 @@
+{
+    "name": "PostOffice",
+    "devDependencies": {
+        "grunt": "",
+        "grunt-contrib-concat": "~0.3.0"
+    }
+}
