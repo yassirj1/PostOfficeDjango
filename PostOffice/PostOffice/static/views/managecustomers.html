@@ -1,16 +1,33 @@
+<form role="form" ng-submit="sendData(putForm)" name="putForm"></form>
+
 <table ng-table="tableParams" class="table">
     <tbody ng-repeat="customer in $data">
         <tr id="tr{{customer.customer_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
-            <td class="rowTd" data-title="'ID'"          sortable="'customer_id'">{{customer.customer_id}}</td>
-            <td class="rowTd" data-title="'Firstname'"   sortable="'first_name'">{{customer.first_name}}</td>
-            <td class="rowTd" data-title="'Lastname'"    sortable="'last_name'">{{customer.last_name}}</td>
-            <td class="rowTd" data-title="'Email'"       sortable="'customer_email'">{{customer.customer_email}}</td>
-            <td class="rowTd" data-title="'Phone'"       sortable="'phone_number'">{{customer.phone_number}}</td>
-            <td class="rowTd" ><input type=button id="editRowBtn{{customer.customer_id}}" value="edit"
-              ng-click="setEditId(customer.customer_id)"></td>
+            <td class="rowTd" data-title="'ID'" sortable="'customer_id'">
+                <span ng-if="!customer.$edit">{{customer.customer_id}}</span>
+                <div ng-if="customer.$edit"><input form="putForm" class="form-control" type="text" ng-model="customer.customer_id" readonly></div>
+            </td>
+            <td class="rowTd" data-title="'Firstname'" sortable="'first_name'">
+                <span ng-if="!customer.$edit">{{customer.first_name}}</span>
+                <div ng-if="customer.$edit"><input form="putForm" class="form-control" type="text" ng-model="customer.first_name" /></div>
+            </td>
+            <td class="rowTd" data-title="'Lastname'" sortable="'last_name'">
+                 <span ng-if="!customer.$edit">{{customer.last_name}}</span>
+                 <div ng-if="customer.$edit"><input form="putForm" class="form-control" type="text" ng-model="customer.last_name" /></div>
+            </td>
+            <td class="rowTd" data-title="'Email'" sortable="'customer_email'">
+                <span ng-if="!customer.$edit">{{customer.customer_email}}</span>
+            <div ng-if="customer.$edit"><input form="putForm" class="form-control" type="text" ng-model="customer.customer_email" /></div>
+            </td>
+            <td class="rowTd" data-title="'Phone'" sortable="'phone_number'">
+                <span ng-if="!customer.$edit">{{customer.phone_number}}</span>
+            <div ng-if="customer.$edit"><input form="putForm" class="form-control" type="text" ng-model="customer.phone_number" /></div>
+            </td>
+            <td class="rowTd" data-title="'Actions'">
+                <a ng-if="!customer.$edit" href="" class="btn btn-default btn-xs" ng-click="customer.$edit = true">Edit</a>
+                <a type="submit" ng-if="customer.$edit" href="" class="btn btn-primary btn-xs" ng-click="customer.$edit = false; sendData(putForm)">Save</a>
+            </td>
           </tr>
-          <tr ng-show="editId==customer.customer_id" ng-if="editId==customer.customer_id">
-            <td colspan="7" ng-include src="'static/views/editRow.html'"></td>
-        </tr>
+          
     </tbody>
-</table>
+    </table>

@@ -57,28 +57,28 @@ angular.module('postOfficeApp')
 	function ($scope, $filter, ngTableParams, poService) {
 		var data = [];
 
-	poService.getCustomers().success( function (response) {
-		data = response;
-	});
+		poService.getCustomers().success( function (response) {
+			data = response;
+		});
 
-$scope.customers = data;
 
-$scope.tableParams = new ngTableParams({
-	page: 1,
-	count: 10
-},{
-	total: data.length,
-	getData: function($defer, params) {
-		var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
-		$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-	}
-});
+		$scope.tableParams = new ngTableParams({
+			page: 1,
+			count: 10
+		},{
+			total: data.length,
+			getData: function($defer, params) {
+				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+			}
+		});
 
-$scope.editId = -1;
+		$scope.sendData = function(putForm) {
+			console.log($scope.customer);
+			console.log($scope.putForm);
+		}
 
-$scope.setEditId =  function(pid) {
-	$scope.editId = pid;
-}
+
 }]);
 'use strict';
 angular.module('postOfficeApp')
@@ -94,7 +94,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.updateAddress = function(data) {
-		return $http.post('api/addresses'  + '/' + data.address_id, data)
+		return $http.put('api/addresses'  + '/' + data.address_id, data)
 	};
 
 	poService.getShipments = function() {
@@ -106,7 +106,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.updateShipments = function(data) {
-		return $http.post('api/shipments'  + '/' + data.shipment_id, data)
+		return $http.put('api/shipments'  + '/' + data.shipment_id, data)
 	};
 
 	poService.getDrivers = function() {
@@ -118,7 +118,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.updateDrivers = function(data) {
-		return $http.post('api/drivers'  + '/' + data.driver_id, data)
+		return $http.put('api/drivers'  + '/' + data.driver_id, data)
 	};
 
 	poService.getCustomers = function() {
@@ -130,7 +130,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.updateCustomers = function(data) {
-		return $http.post('api/customers'  + '/' + data.customer_id, data)
+		return $http.put('api/customers'  + '/' + data.customer_id, data)
 	};
 
 	poService.getDeliveryRoutes = function() {
@@ -142,7 +142,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.updateDeliveryRoutes = function(data) {
-		return $http.post('api/deliveryroutes'  + '/' + data.delivery_route_id, data)
+		return $http.put('api/deliveryroutes'  + '/' + data.delivery_route_id, data)
 	};
 
 	poService.getIncominingShipments = function() {
@@ -154,7 +154,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.updateIncomingShipments = function(data) {
-		return $http.post('api/incomingshipments'  + '/' + data.route_id, data)
+		return $http.put('api/incomingshipments'  + '/' + data.route_id, data)
 	};
 
 	return poService;
