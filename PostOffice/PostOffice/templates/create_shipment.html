@@ -2,84 +2,118 @@
                     <div class="col-lg-4">
                         <center><h1>CREATE A SHIPMENT</h1>
                         <form> 
-                    <h3>Recipient Address</h3>
+                    <h3>RECIPIENT INFORMATION</h3>
                     <div class="input-group">
 			 <label class="control-label">FIRST NAME</label>
                          <input type="text" class="form-control" placeholder="First Name">
-                         
+                         <br>
                     	 <label class="control-label">LAST NAME</label>
                          <input type="text" class="form-control" placeholder="Last Name">
-
+                        <br>
                          <label class="control-label">ADDRESS</label>
                          <input type="text" class="form-control" placeholder="Address 1">
+                         <br>
                          <input type="text" class="form-control" placeholder="Address 2">
-                         <input type="text" class="form-control" placeholder="Address 3">
-                    	
+                         <br>
 			 <label class="control-label">CITY</label>
                          <input type="text" class="form-control" placeholder="City">
-                   
-			<label class="control-label">STATE</label>
-                    <select class="form-control">
-                        <option>    AL</option>
-                        <option>	AK</option>
-                        <option>	AZ</option>
-                        <option>	AR</option>
-                        <option>	CA</option>
-                        <option>	CO</option>
-                        <option>	CT</option>
-                        <option>	DE</option>
-                        <option>	FL</option>
-                        <option>	GA</option>
-                        <option>	HI</option>
-                        <option>	ID</option>
-                        <option>	IL</option>
-                        <option>	IN</option>
-                        <option>	IA</option>
-                        <option>	KS</option>
-                        <option>	KY</option>
-                        <option>	LA</option>
-                        <option>	ME</option>
-                        <option>	MD</option>
-                        <option>	MA</option>
-                        <option>	MI</option>
-                        <option>	MN</option>
-                        <option>	MS</option>
-                        <option>	MO</option>
-                        <option>	MT</option>
-                        <option>	NE</option>
-                        <option>	NV</option>
-                        <option>	NH</option>
-                        <option>	NJ</option>
-                        <option>	NM</option>
-                        <option>	NY</option>
-                        <option>	NC</option>
-                        <option>	ND</option>
-                        <option>	OH</option>
-                        <option>	OK</option>
-                        <option>	OR</option>
-                        <option>	PA</option>
-                        <option>	RI</option>
-                        <option>	SC</option>
-                        <option>	SD</option>
-                        <option>	TN</option>
-                        <option>	TX</option>
-                        <option>	UT</option>
-                        <option>	VT</option>
-                        <option>	VA</option>
-                        <option>	WA</option>
-                        <option>	WV</option>
-                        <option>	WI</option>
-                        <option>	WY</option>
-                    </select>
+                   <br>
+            <label class="control-label">STATE</label>
+            <select name="state" class="form-control">
+                <option value="00">AL</option>
+                <option value="01">AK</option>
+                <option value="02">AZ</option>
+                <option value="03">AR</option>
+                <option value="04">CA</option>
+                <option value="05">CO</option>
+                <option value="06">CT</option>
+                <option value="07">DE</option>
+                <option value="08">DC</option>
+                <option value="09">FL</option>
+                <option value="10">GA</option>
+                <option value="11">HI</option>
+                <option value="12">ID</option>
+                <option value="13">IL</option>
+                <option value="14">IN</option>
+                <option value="15">IA</option>
+                <option value="16">KS</option>
+                <option value="17">KY</option>
+                <option value="18">LA</option>
+                <option value="19">ME</option>
+                <option value="20">MD</option>
+                <option value="21">MA</option>
+                <option value="21">MI</option>
+                <option value="22">MN</option>
+                <option value="23">MS</option>
+                <option value="24">MO</option>
+                <option value="25">MT</option>
+                <option value="26">NE</option>
+                <option value="27">NV</option>
+                <option value="28">NH</option>
+                <option value="29">NJ</option>
+                <option value="30">NM</option>
+                <option value="31">NY</option>
+                <option value="32">NC</option>
+                <option value="33">ND</option>
+                <option value="34">OH</option>
+                <option value="35">OK</option>
+                <option value="36">OR</option>
+                <option value="37">PA</option>
+                <option value="38">RI</option>
+                <option value="39">SC</option>
+                <option value="40">SD</option>
+                <option value="41">TN</option>
+                <option value="42">TX</option>
+                <option value="43">UT</option>
+                <option value="44">VT</option>
+                <option value="45">VA</option>
+                <option value="46">WA</option>
+                <option value="47">WV</option>
+                <option value="48">WI</option>
+                <option value="49">WY</option>
+            </select>
                        <br>
 			<label class="control label">ZIPCODE</label>
                          <input type="text" class="form-control" placeholder="Zipcode">
-		    	<label class="control label">COUNTRY</label>
-			<select class="form-control">
-				<option>US</option>
-				<option>CA</option>
-				<option>MX</option>
-			</select>
+		    	<br>
+                <h3>PACKAGE INFORMATION</h3>
+                 <br>
+            <label class="control-label">PACKAGE TYPE</label>
+            <select name="PACKAGETYPRE" class="form-control">
+                <option value="1">One Day</option>
+                <option value="2">Two Day</option>
+                <option value="3">Three Day</option>
+                <option value="4">Ground</option>
+                <option value="5">Freight</option>
+            </select>
+             <br>
+            <label class="control-label">SHIPMENT TYPE</label>
+            <select name="SHIPMENTTYPE" class="form-control">
+                <option value="1">Ground</option>
+                <option value="2">Air</option>
+                <option value="3">Sea</option>
+            </select>
+             <br>
+             <label class="control-label">PACKAGE WEIGHT</label>
+            <input type="text" class="form-control" placeholder="PACKAGE WEIGHT">
+             <br>
+             <label class="control-label">PACKAGE RATE</label>
+            <input type="text" class="form-control" placeholder="PACKAGE RATE">
+            <br>
+            <label class="control-label">SIGNATURE REQUIRED</label>
+            <select name="SIGNATUREREQUIRED" class="form-control">
+                <option value="0">YES</option>
+                <option value="1">NO</option>
+            </select> 
+             <br>
+            <label class="control-label">SIGNATURE CONFIRMATION</label>
+            <select name="SIGNATURECONFIRMATION" class="form-control">
+                <option value="0">YES</option>
+                <option value="1">NO</option>
+            </select>
+            <br>           
+        <a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-user"></span> CREATE</a>
+     </div>
                     </div>
                     </form>
                     </center></div>
