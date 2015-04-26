@@ -43,15 +43,15 @@
                 <span ng-if="!driver.$edit">{{driver.driver_ssn}}</span>
                 <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_ssn" readonly></div>
             </td>
-            <td class="rowTd" data-title="'Name'" sortable="'driver_name'">
+            <td class="rowTd" data-title="'Name'" filter="{ 'river_name': 'text' }" sortable="'driver_name'">
                 <span ng-if="!driver.$edit">{{driver.driver_name}}</span>
                 <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_name" /></div>
             </td>
-            <td class="rowTd" data-title="'Phone'" sortable="'driver_phone_number'">
+            <td class="rowTd" data-title="'Phone'"  filter="{ 'driver_phone_number': 'text' }" sortable="'driver_phone_number'">
                 <span ng-if="!driver.$edit">{{driver.phone_number}}</span>
             <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_phone_number" /></div>
             </td>
-            <td class="rowTd" data-title="'Drug test Passed'" sortable="'drug_test_passed'">
+            <td class="rowTd" data-title="'Drug test Passed'" filter="{ 'drug_test_passed': 'text' }" sortable="'drug_test_passed'">
                 <span ng-if="!driver.$edit">{{driver.drug_test_passed}}</span>
             <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.drug_test_passed" /></div>
             </td>
