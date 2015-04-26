@@ -44,7 +44,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertCustomers = function(data) {
-		return $http.post('api/customers', data);
+		return $http.post('api/customers/', data);
 	};
 
 	poService.updateCustomers = function(data) {

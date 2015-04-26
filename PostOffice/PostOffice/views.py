@@ -4,7 +4,10 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from PostOffice.models import Address, Shipments, Customer, Driver, Incoming_Shipments, Delivery_Routes
 from django.contrib.auth.models import User
-from PostOffice.serializers import AddressOutputSerializer, AddressInputSerializer, ShipmentsInputSerializer, ShipmentsOutputSerializer, CustomerSerializer, DriverSerializer, IncomingShipmentsSerializer, DeliveryRoutesSerializer
+from PostOffice.serializers import (AddressOutputSerializer, AddressInputSerializer, ShipmentsInputSerializer,
+	ShipmentsOutputSerializer, CustomerOutputSerializer, CustomerInputSerializer,
+	DriverSerializer, IncomingShipmentsSerializer, DeliveryRoutesSerializer
+)
 from rest_framework.response import Response
 
 
@@ -72,12 +75,17 @@ class CustomerView(generics.ListCreateAPIView):
 	"""
 	queryset = Customer.objects.all()
 	model = Customer
-	serializer_class= CustomerSerializer
+	
+	def get_serializer_class(self):
+		if self.request.method == 'POST':
+			return CustomerInputSerializer
+		return CustomerOutputSerializer
+
 
 class CustomerInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Customer.objects.all()
 	model = Customer
-	serializer_class = CustomerSerializer	
+	serializer_class = CustomerOutputSerializer	
 
 class IncomingShipmentsView(generics.ListCreateAPIView):
 	"""

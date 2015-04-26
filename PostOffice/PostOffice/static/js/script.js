@@ -124,12 +124,13 @@ angular.module('postOfficeApp')
 			});
 		};
 
-		// $scope.postData = function(customer) {
-		// 	$scope.formData = angular.copy(customer)
-		// 	poService.insertCustomers($scope.formData).success(function (response) {
-		// 		console.log("Ok",response)
-		// 	});
-		// };
+		$scope.postForm = {};
+		$scope.postData = function(customer) {
+			$scope.postForm = angular.copy(customer)
+			poService.insertCustomers($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
 
 
 }]);
@@ -208,7 +209,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertCustomers = function(data) {
-		return $http.post('api/customers', data);
+		return $http.post('api/customers/', data);
 	};
 
 	poService.updateCustomers = function(data) {

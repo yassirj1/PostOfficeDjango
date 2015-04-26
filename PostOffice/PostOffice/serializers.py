@@ -11,13 +11,18 @@ from PostOffice.models import (
 
 
 
-class CustomerSerializer(serializers.ModelSerializer):
+class CustomerOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = ('customer_id', 'phone_number', 'first_name', 'last_name', 'customer_email', 'date_joined')
 
+class CustomerInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ('phone_number', 'first_name', 'last_name', 'customer_email')
+
 class AddressOutputSerializer(serializers.ModelSerializer):
-    customer_id = CustomerSerializer()
+    customer_id = CustomerInputSerializer()
     class Meta:
         model = Address
         fields = ('address_id', 'customer_id','street_line1','street_line2',
@@ -30,7 +35,7 @@ class AddressInputSerializer(serializers.ModelSerializer):
         'street_line3','street_line4','city','state','country','zipcode')
 
 class ShipmentsOutputSerializer(serializers.ModelSerializer):
-    customer_id = CustomerSerializer()
+    customer_id = CustomerInputSerializer()
     reciever_address = AddressInputSerializer()
     class Meta:
         model = Shipments
