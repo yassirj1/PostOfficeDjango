@@ -18,7 +18,12 @@
     <!-- Custom CSS -->
     <link href="{% static "bootstrap/dist/css/simple-sidebar.css" %}" rel="stylesheet">
 
-
+    <style>
+        body {
+            padding-top: 70px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,56 +38,80 @@
 
     </head>
 
+
     <body ng-app="postOfficeApp">
-        <div class="navbar navbar-fixed-bottom" ng-controller="MasterCtrl">
-        <div class="navbar-form navbar-right">
-            <button ng-show="authenticated" ng-click="logout()" ng-controller="MainCtrl" class="btn btn-default">Logout</button>
-        </div>
-        <div id="login_view" ng-hide="authenticated" ng-controller="LoginCtrl">
-            <form role="form" class="navbar-form navbar-right" ng-submit="login(loginForm)" name="loginForm" novalidate>
-                <div class="form-group">
-                    <input name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="MasterCtrl">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-form navbar-right">
+                    <input ng-show="authenticated" ng-click="logout()" ng-controller="MainCtrl" class="btn btn-default" value="logout">
                 </div>
-                <div class="form-group">
-                    <input name="password" id="id_password" type="password" ng-model="model.password" placeholder="Password" class="form-control" required />
-                </div>
-                <div class="btn-group">
-                    <input type="submit" class="btn btn-default" value="login">
-                    <input type="submit" class="btn btn-default" value="register"
-                           ng-click="register()">
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-        <div id="wrapper">
-
-            <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#">
-                            Home
-                        </a>
-                    </li>
-                    <li><a ui-sref="managedrivers">Manage Drivers</a></li>
-                    <li><a ui-sref="managebranch">Manage Branch</a></li>
-                    <li><a ui-sref="manageshipments">Manage Shipments</a></li>
-                    <li><a ui-sref="managecustomers">Manage Customers</a></li>
-                    <li><a ui-sref="reports">Reports</a></li>
-                </ul>
-            </div>
-            <!-- /#sidebar-wrapper -->
-
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
-
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="panel-body">
-                            <div ui-view></div>
+                <div id="login_view" ng-hide="authenticated" ng-controller="LoginCtrl">
+                    <form role="form" class="navbar-form navbar-right" ng-submit="login(loginForm)" name="loginForm" novalidate>
+                        <div class="form-group">
+                            <input name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
                         </div>
+                        <div class="form-group">
+                            <input name="password" id="id_password" type="password" ng-model="model.password" placeholder="Password" class="form-control" required />
+                        </div>
+                        <div class="btn-group">
+                            <input type="submit" class="btn btn-default" value="login">
+                            <input type="submit" class="btn btn-default" value="register"
+                            ng-click="register()">
+                        </div>
+                    </form>
+                </div>
+                <div class="navbar-header" ng-show="authenticated">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Home</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" ng-show="authenticated">
+                        <li><a ui-sref="managedrivers">Drivers</a></li>
+                        <li><a ui-sref="managebranch">Branch</a></li>
+                        <li><a ui-sref="manageshipments">Shipments</a></li>
+                        <li><a ui-sref="managecustomers">Customers</a></li>
+                        <li><a ui-sref="reports">Reports</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!--
+        <div class="navbar navbar-fixed-bottom" ng-controller="MasterCtrl">
+            <div class="navbar-form navbar-right">
+                <button ng-show="authenticated" ng-click="logout()" ng-controller="MainCtrl" class="btn btn-default">Logout</button>
+            </div>
+            <div id="login_view" ng-hide="authenticated" ng-controller="LoginCtrl">
+                <form role="form" class="navbar-form navbar-right" ng-submit="login(loginForm)" name="loginForm" novalidate>
+                    <div class="form-group">
+                        <input name="username" id="id_username" type="text" ng-model="model.username" placeholder="Username" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <input name="password" id="id_password" type="password" ng-model="model.password" placeholder="Password" class="form-control" required />
+                    </div>
+                    <div class="btn-group">
+                        <input type="submit" class="btn btn-default" value="login">
+                        <input type="submit" class="btn btn-default" value="register"
+                        ng-click="register()">
+                    </div>
+                </form>
+            </div>
+        </div>
+        -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="panel-body">
+                        <div ui-view></div>
                     </div>
                 </div>
             </div>
@@ -116,17 +145,17 @@
             });
         </script>
         <script>
-           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-           ga('create', 'UA-XXXXX-X');
-           ga('send', 'pageview');
-       </script>
+         ga('create', 'UA-XXXXX-X');
+         ga('send', 'pageview');
+     </script>
 
 
 
-   </body>
+ </body>
 
-   </html>
+ </html>

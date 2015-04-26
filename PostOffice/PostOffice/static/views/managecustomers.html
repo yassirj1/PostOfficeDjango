@@ -1,5 +1,27 @@
+<div class="container">
+<form class="form-inline" role="form">
+    <div class="form-group">
+      <label for="FirstName">First Name:</label>
+      <input ng-model="customer.first_name" type="text" class="form-control" id="FirstName" placeholder="Enter first name">
+    </div>
+    <div class="form-group">
+      <label for="LastName">Last Name:</label>
+      <input ng-model="customer.last_name" type="text" class="form-control" id="LastName" placeholder="Enter last name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input ng-model="customer.customer_email" type="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="PhoneNumber">Phone Number</label>
+      <input ng-model="customer.phone_number" type="text" class="form-control" id="PhoneNumber" placeholder="Enter phone number">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  </div>
+  <br/>
 
-<form role="form" name="putForm" id="putForm">
+
 
 <table ng-table="tableParams" class="table">
     <tbody ng-repeat="customer in $data">
@@ -32,4 +54,3 @@
           
     </tbody>
     </table>
-</form>
