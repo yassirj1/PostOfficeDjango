@@ -7,7 +7,9 @@ angular.module('postOfficeApp', [
 	]);
 
 angular.module('postOfficeApp')
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
 	$stateProvider
 	.state('home', {
 		url:'',
@@ -71,6 +73,10 @@ angular.module('postOfficeApp')
 		url:'/managecustomers',
 		templateUrl: 'static/views/managecustomers.html',
 		controller: 'customerTableCtrl'
+	})
+	.state('register', {
+		url:'/register',
+		templateUrl: 'static/views/register.html'
 	})
 	.state('reports', {
 		url: '/reports',

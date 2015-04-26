@@ -33,10 +33,17 @@ angular.module('postOfficeApp')
 		$scope.formData = {};
 		$scope.sendData = function(customer) {
 			$scope.formData = angular.copy(customer)
-			poService.updateCustomers($scope.formData).success(function(formData) {
-				console.log("Ok",formData)
+			poService.updateCustomers($scope.formData).success(function (response) {
+				console.log("Ok",response)
 			});
-		}
+		};
+
+		// $scope.postData = function(customer) {
+		// 	$scope.formData = angular.copy(customer)
+		// 	poService.insertCustomers($scope.formData).success(function (response) {
+		// 		console.log("Ok",response)
+		// 	});
+		// };
 
 
 }]);

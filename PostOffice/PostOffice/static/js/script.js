@@ -7,7 +7,9 @@ angular.module('postOfficeApp', [
 	]);
 
 angular.module('postOfficeApp')
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
 	$stateProvider
 	.state('home', {
 		url:'',
@@ -72,6 +74,10 @@ angular.module('postOfficeApp')
 		templateUrl: 'static/views/managecustomers.html',
 		controller: 'customerTableCtrl'
 	})
+	.state('register', {
+		url:'/register',
+		templateUrl: 'static/views/register.html'
+	})
 	.state('reports', {
 		url: '/reports',
 		templateUrl: 'static/views/reports.html'
@@ -113,10 +119,17 @@ angular.module('postOfficeApp')
 		$scope.formData = {};
 		$scope.sendData = function(customer) {
 			$scope.formData = angular.copy(customer)
-			poService.updateCustomers($scope.formData).success(function(formData) {
-				console.log("Ok",formData)
+			poService.updateCustomers($scope.formData).success(function (response) {
+				console.log("Ok",response)
 			});
-		}
+		};
+
+		// $scope.postData = function(customer) {
+		// 	$scope.formData = angular.copy(customer)
+		// 	poService.insertCustomers($scope.formData).success(function (response) {
+		// 		console.log("Ok",response)
+		// 	});
+		// };
 
 
 }]);
