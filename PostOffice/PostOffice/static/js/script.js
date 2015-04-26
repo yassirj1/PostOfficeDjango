@@ -109,10 +109,13 @@ angular.module('postOfficeApp')
 				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 			}
 		});
-
-		$scope.sendData = function(putForm) {
-			console.log($scope.customer);
-			console.log($scope.putForm);
+		
+		$scope.formData = {};
+		$scope.sendData = function(customer) {
+			$scope.formData = angular.copy(customer)
+			poService.updateCustomers($scope.formData).success(function(formData) {
+				console.log("Ok",formData)
+			});
 		}
 
 
