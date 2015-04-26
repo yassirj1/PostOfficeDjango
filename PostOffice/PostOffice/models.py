@@ -121,9 +121,6 @@ class Customer(models.Model):
 	customer_email = models.EmailField(max_length=75)
 	date_joined = models.DateField(auto_now=True)
 
-	# def save(self, *args, **kwargs):
-	# 	if not self.date_joined:
-	# 		self.date_joined = datetime.date.today()
 
 	def __unicode__(self):
 		return '{} {}'.format(self.customer_id, self.phone_number, self.first_name ,

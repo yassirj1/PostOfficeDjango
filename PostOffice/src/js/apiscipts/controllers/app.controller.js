@@ -26,7 +26,13 @@ angular.module('postOfficeApp')
 			total: data.length,
 			getData: function($defer, params) {
 				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
 				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
 			}
 		});
 		
