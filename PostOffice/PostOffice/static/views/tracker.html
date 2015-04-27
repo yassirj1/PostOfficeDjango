@@ -1,15 +1,19 @@
-
-<input type="text" ng-model="search.tracking_number">
+<h3 align="center">Enter Tracking Code</h3>
+<input id="tracking" type="text" ng-model="search.tracking_number">
 	<table class="table table-hover" ng-show="(shipments | filter:search.tracking_number).length == 1">
 		<caption>Tracking Data</caption>
 		<thead>
 			<tr>
 				<th class="col-md-2">Tracking Number</th>
+				<th class="col-md-2">Delivery Status</th>
+				<th class="col-md-2">Last Location</th>
 				<th class="col-md-2">Estimated Arrival</th>
 			</tr>
 		</thead>
 		<tr ng-repeat="shipment in shipments | filter:search.tracking_number" >
 			<td>{{shipment.tracking_number}}</td>
+			<td>{{shipment.delivery_status}}</td>
+			<td>{{shipment.last_post_office}}</td>
 			<td>{{shipment.est_arrival}}</td>
 		</tr>
 	</table>

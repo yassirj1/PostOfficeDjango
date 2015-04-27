@@ -25,14 +25,12 @@ class AddressOutputSerializer(serializers.ModelSerializer):
     customer_id = CustomerInputSerializer()
     class Meta:
         model = Address
-        fields = ('address_id', 'customer_id','street_line1','street_line2',
-        'street_line3','street_line4','city','state','country','zipcode')
+        fields = ('address_id', 'customer_id','street_line1','city','state','country','zipcode')
 
 class AddressInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = ('address_id', 'customer_id','street_line1','street_line2',
-        'street_line3','street_line4','city','state','country','zipcode')
+        fields = ('address_id', 'customer_id','street_line1','city','state','country','zipcode')
 
 class ShipmentsOutputSerializer(serializers.ModelSerializer):
     customer_id = CustomerInputSerializer(read_only=True)
