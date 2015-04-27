@@ -1,37 +1,28 @@
-<form>
-	<div class="row">
-		<div class="col-md-8">
-			<h4>NEW DRIVER INFORMATION</h4>     
-			<hr>   
-			
-			<div class="input-group">
-				<span class="input-group-addon"><span class="glyphicon glyphicon-user">			</span></span>
-				<label class="col-md-8 control-label">NAME</label>
-				<input type="text" class="form-control" placeholder="NAME">
-				<br>
-			</div>
-			<br>
-			<label class="col-lg-4 control-label">PHONE NUMBER</label>
-			<input type="int" class="form-control" placeholder="PHONE NUMBER">
-			<br>
-			<label class="col-md-8 control-label">SSN</label>
-			<input type="text" class="form-control" placeholder="SOCIAL SECURITY NUMBER">
-			<br>
-			<label class="control-label">DRUG TEST CLEARED</label>
-			<select name="state" class="form-control">
-				<option value="TRUE">YES</option>
-				<option value="FALSE">NO</option>
-				
-			</select>
-			<br>
-			
-			<a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-user"></span> CREATE</a>
-		</div>
-	</div>
-	<br>
-</form> 
-<form role="form" ng-submit="sendData(putForm)" name="putForm"></form>
-
+<div class="container">
+<form class="form-inline" role="form" ng-submit="postData(customer)">
+    <div class="form-group">
+      <label for="DriverName">Name:</label>
+      <input ng-model="driver.driver_name" type="text" class="form-control" id="DriverName" placeholder="Enter Driver Name">
+    </div>
+    <div class="form-group">
+      <label for="DriverSSN">Driver SSN:</label>
+      <input ng-model="driver.driver_ssn" type="text" class="form-control" id="DriverSSN" placeholder="Enter Driver SSN">
+    </div>
+    <div class="form-group">
+      <label for="PhoneNumber">Phone Number:</label>
+      <input ng-model="driver.driver_phone_number" type="email" class="form-control" id="PhoneNumber" placeholder="Enter Phone Number">
+    </div>
+    <div class="form-group">
+      <label for="DrugTestPassed">Drug Test Passed</label>
+      <select name="state" class="form-control">
+            <option value="TRUE">YES</option>
+            <option value="FALSE">NO</option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-default" ng-click"postData(driver)">
+  </form>
+  </div>
+  <br/>
 <table ng-table="tableParams" class="table">
     <tbody ng-repeat="driver in $data">
         <tr id="tr{{driver.driver_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
