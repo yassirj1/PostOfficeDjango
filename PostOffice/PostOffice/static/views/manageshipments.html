@@ -34,9 +34,17 @@
                 <span ng-if="!shipment.$edit">{{shipment.tracking_number}}</span>
                 <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.tracking_number" value="{{shipment.tracking_number}}" /></div>
             </td>
-            <td class="rowTd" data-title="'PO Shipped'" filter="{ 'post_office_shipped_from': 'text' }">
-                <span ng-if="!shipment.$edit">{{shipment.post_office_shipped_from}}</span>
-                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.post_office_shipped_from" value="{{shipment.post_office_shipped_from}}" /></div>
+            <td class="rowTd" data-title="'Pckg Type'" filter="{ 'package_type': 'text' }">
+                <span ng-if="!shipment.$edit">{{shipment.package_type}}</span>
+                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.package_type" value="{{shipment.package_type}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Pckg Rate'" filter="{ 'package_rate': 'text' }">
+                <span ng-if="!shipment.$edit">{{shipment.package_rate}}</span>
+                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.package_rate" value="{{shipment.package_rate}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'PO Last'" filter="{ 'last_post_office': 'text' }">
+                <span ng-if="!shipment.$edit">{{shipment.last_post_office}}</span>
+                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.last_post_office" value="{{shipment.last_post_office}}" /></div>
             </td>
             <td class="rowTd" data-title="'Cust Name'">
                  <span ng-if="!shipment.$edit">{{shipment.customer_id.first_name}} {{shipment.customer_id.last_name}}</span>

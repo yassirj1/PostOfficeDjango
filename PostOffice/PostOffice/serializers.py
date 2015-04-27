@@ -35,16 +35,27 @@ class AddressInputSerializer(serializers.ModelSerializer):
         'street_line3','street_line4','city','state','country','zipcode')
 
 class ShipmentsOutputSerializer(serializers.ModelSerializer):
-    customer_id = CustomerInputSerializer()
-    reciever_address = AddressInputSerializer()
+    customer_id = CustomerInputSerializer(read_only=True)
+    reciever_address = AddressInputSerializer(read_only=True)
+    package_type = serializers.SerializerMethodField()
+    order_status = serializers.SerializerMethodField()
+    delivery_status = serializers.SerializerMethodField()
     class Meta:
         model = Shipments
         fields = ('shipment_id', 'tracking_number', 'customer_id', 'time_shipped', 'reciever_address', 'receiver_name', 'post_office_shipped_from','date_ship', 'est_arrival', 'last_post_office', 'order_status', 'delivery_status', 'package_type', 'package_weight', 'package_rate', 'signature_required', 'signature_confirmed')
+    def get_package_type(self,obj):
+        return obj.get_package_type_display()
+
+    def get_order_status(self,obj):
+        return obj.get_order_status_display()
+
+    def get_delivery_status(self,obj):
+        return obj.get_delivery_status_display()
 
 class ShipmentsInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shipments
-        fields = ('shipment_id', 'tracking_number', 'customer_id', 'time_shipped', 'reciever_address', 'receiver_name', 'post_office_shipped_from','date_ship', 'est_arrival', 'last_post_office', 'order_status', 'delivery_status', 'package_type', 'package_weight', 'package_rate', 'signature_required', 'signature_confirmed')
+        fields = ('shipment_id', 'customer_id', 'reciever_address', 'receiver_name', 'post_office_shipped_from', 'package_type', 'package_weight', 'signature_required', 'signature_confirmed')
 
 class DriverOutputSerializer(serializers.ModelSerializer):
     class Meta:

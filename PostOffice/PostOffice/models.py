@@ -1,5 +1,6 @@
 from django.db import models
-import datetime
+from datetime import datetime, timedelta
+import random, string
 
 POST_OFFICE_SHIPPED_FROM = (
 		(77025, "Houston"),
@@ -152,7 +153,7 @@ class Shipments_Manager(models.Manager):
 class Shipments(models.Model):
 	objects = Shipments_Manager()
 	shipment_id = models.AutoField(primary_key=True)
-	tracking_number = models.CharField(max_length=200)
+	tracking_number = models.CharField(max_length=10)
 	customer_id = models.ForeignKey(Customer, related_name = "ShipmentCustomer")
 	time_shipped = models.DateTimeField(auto_now=True)
 	reciever_address = models.ForeignKey(Address, related_name = "ShipmentAddress")
@@ -164,10 +165,21 @@ class Shipments(models.Model):
 	order_status = models.IntegerField(choices=ORDER_STATUS, default=1)
 	delivery_status = models.IntegerField(choices=DELIVERY_STATUS, default=1)
 	package_type = models.IntegerField(choices=PACKAGE_TYPE, default=3)
-	package_weight = models.IntegerField(max_length=5)
-	package_rate = models.IntegerField(max_length=5)
+	package_weight = models.DecimalField(max_digits=4,decimal_places=2)
+	package_rate = models.DecimalField(max_digits=4,decimal_places=2)
 	signature_required = models.BooleanField(default=None)
 	signature_confirmed = models.BooleanField(default=None)
+
+	def save(self, *args, **kwargs):
+		if not self.package_rate:
+			self.order_status = 1
+			self.delivery_status = 1
+			self.last_post_office = self.post_office_shipped_from
+			self.tracking_number = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
+			self.package_rate = self.package_weight + (7-self.package_type)
+			self.est_arrival = datetime.now() + timedelta(days=self.package_type)
+		super(Shipments,self).save( *args, **kwargs)
+
 
 	def __unicode__(self):
 		return '{} {}'.format(self.tracking_number, self.customer_id, self.time_shipped ,
