@@ -79,9 +79,10 @@ angular.module('postOfficeApp')
 		url:'/register',
 		templateUrl: 'static/views/register.html'
 	})
-	.state('reports', {
-		url: '/reports',
-		templateUrl: 'static/views/reports.html'
+	.state('manageaddresses', {
+		url: '/addresses',
+		templateUrl: 'static/views/manageaddresses.html'
+		controller: 'addressesTableCtrl'
 	});
 	$urlRouterProvider.otherwise("")
 });
