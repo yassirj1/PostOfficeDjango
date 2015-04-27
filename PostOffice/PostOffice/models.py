@@ -167,8 +167,8 @@ class Shipments(models.Model):
 	package_type = models.IntegerField(choices=PACKAGE_TYPE, default=3)
 	package_weight = models.DecimalField(max_digits=4,decimal_places=2)
 	package_rate = models.DecimalField(max_digits=4,decimal_places=2)
-	signature_required = models.BooleanField(default=None)
-	signature_confirmed = models.BooleanField(default=None)
+	signature_required = models.BooleanField(default=False)
+	signature_confirmed = models.BooleanField(default=False)
 
 	def save(self, *args, **kwargs):
 		if not self.package_rate:

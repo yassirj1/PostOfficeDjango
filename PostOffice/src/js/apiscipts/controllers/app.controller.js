@@ -111,6 +111,19 @@ angular.module('postOfficeApp')
 		});
 
 
+		$scope.selectCustomer = [];
+
+		poService.getCustomers().success( function (response) {
+			$scope.selectCustomer = response;
+		});
+
+		$scope.selectAddress = [];
+
+		poService.getAddresses().success( function (response) {
+			$scope.selectAddress = response;
+		});
+
+
 		$scope.tableParams = new ngTableParams({
 			page: 1,
 			count: 10

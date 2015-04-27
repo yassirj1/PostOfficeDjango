@@ -1,81 +1,101 @@
 <div class="container">
-<form class="form-inline" role="form" ng-submit="postData(shipment)">
+<h3 align="left">Create Shipment</h3>
+  <form class="form-inline" role="form" ng-submit="postData(shipment)">
     <div class="form-group">
-      <label for="FirstName">First Name:</label>
-      <input ng-model="shipment.first_name" type="text" class="form-control" id="FirstName" placeholder="Enter first name">
+      <label for="customer">Phone Number:</label>
+      <select id="customer" ng-model="shipment.customer_id" ng-options="customer.customer_id as customer.phone_number for customer in selectCustomer"></select>
     </div>
     <div class="form-group">
-      <label for="LastName">Last Name:</label>
-      <input ng-model="shipment.last_name" type="text" class="form-control" id="LastName" placeholder="Enter last name">
+      <label for="recAdress">Rec Address:</label>
+      <select id="recAddress" ng-model="shipment.reciever_address" ng-options="address.address_id as address.street_line1 for address in selectAddress"></select>
     </div>
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input ng-model="shipment.shipment_email" type="email" class="form-control" id="email" placeholder="Enter email">
+      <label for="recName">Rec Name:</label>
+      <input ng-model="shipment.receiver_name" type="text" class="form-control" id="recName" placeholder="Enter name">
     </div>
     <div class="form-group">
-      <label for="PhoneNumber">Phone Number</label>
-      <input ng-model="shipment.phone_number" type="text" class="form-control" id="PhoneNumber" placeholder="Enter phone number">
+      <label for="shippedFrom">Shipped From:</label>
+      <input ng-model="shipment.post_office_shipped_from" type="text" class="form-control" id="shippedFrom" placeholder="Enter city">
     </div>
-    <input type="submit" class="btn btn-default" ng-click"postData(shipment)">
+    <br>
+    <div class="form-group">
+      <label for="packageType">Package Type</label>
+      <select id="packageType" ng-model="shipment.package_type" class="form-control">
+        <option value="1">One Day</option>
+        <option value="2">Two Day</option>
+        <option value="3">Three Day</option>
+        <option value="4">Ground</option>
+        <option value="5">Freight</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="weight">weight</label>
+      <input ng-model="shipment.package_weight" type="text" class="form-control" id="weight" placeholder="Enter weight">
+    </div>
+    <div class="form-group">
+      <label for="sigRequired">Signature Required?</label>
+      <input ng-model="shipment.signature_required" type="checkbox" id="sigRequired">
+    </div>
+    <input type="submit" class="btn btn-primary" ng-click"postData(shipment)">
   </form>
-  </div>
-  <br/>
+</div>
+<br/>
 
 
 
 <table ng-table="tableParams" show-filter="true" class="table">
-    <tbody ng-repeat="shipment in $data">
-        <tr id="tr{{shipment.shipment_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
-            <td class="rowTd" data-title="'ID'" sortable="'shipment_id'">
-                <span ng-if="!shipment.$edit">{{shipment.shipment_id}}</span>
-                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.shipment_id" value="{{shipment.shipment_id}}" readonly></div>
-            </td>
-            <td class="rowTd" data-title="'Tracking Number'" filter="{ 'tracking_number': 'text' }">
-                <span ng-if="!shipment.$edit">{{shipment.tracking_number}}</span>
-                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.tracking_number" value="{{shipment.tracking_number}}" /></div>
-            </td>
-            <td class="rowTd" data-title="'Pckg Type'" filter="{ 'package_type': 'text' }">
-                <span ng-if="!shipment.$edit">{{shipment.package_type}}</span>
-                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.package_type" value="{{shipment.package_type}}" /></div>
-            </td>
-            <td class="rowTd" data-title="'Pckg Rate'" filter="{ 'package_rate': 'text' }">
-                <span ng-if="!shipment.$edit">{{shipment.package_rate}}</span>
-                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.package_rate" value="{{shipment.package_rate}}" /></div>
-            </td>
-            <td class="rowTd" data-title="'PO Last'" filter="{ 'last_post_office': 'text' }">
-                <span ng-if="!shipment.$edit">{{shipment.last_post_office}}</span>
-                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.last_post_office" value="{{shipment.last_post_office}}" /></div>
-            </td>
-            <td class="rowTd" data-title="'Cust Name'">
-                 <span ng-if="!shipment.$edit">{{shipment.customer_id.first_name}} {{shipment.customer_id.last_name}}</span>
-                 <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.last_name" value="{{shipment.customer_id.first_name}} {{shipment.customer_id.last_name}}" /></div>
-            </td>
-            <td class="rowTd" data-title="'Cust Phone'" filter="{ 'shipment.customer_id.phone_number': 'text' }" sortable="'shipment.customer_id.phone_number'">
-                <span ng-if="!shipment.$edit">{{shipment.customer_id.phone_number}}</span>
-            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.customer_id.phone_number" value="{{shipment.customer_id.phone_number}}" /></div>
-            </td>
-            <td class="rowTd" data-title="'Rec. Address'" filter="{ 'reciever_address.street_line1': 'text' }" sortable="'reciever_address.street_line1'">
-                <span ng-if="!shipment.$edit">{{shipment.reciever_address.street_line1}}</span>
-            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.reciever_address.street_line1" value="{{shipment.reciever_address.street_line1}}" /></div>
-            </td>
-            <td class="rowTd" data-title="'Rec. Name'" filter="{ 'receiver_name': 'text' }" sortable="'receiver_name'">
-                <span ng-if="!shipment.$edit">{{shipment.receiver_name}}</span>
-            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.receiver_name" value="{{shipment.receiver_name}}" readonly=""></div>
-            </td>
-            <td class="rowTd" data-title="'Date Shipped'" filter="{ 'date_ship': 'text' }" sortable="'date_ship'">
-                <span ng-if="!shipment.$edit">{{shipment.date_ship}}</span>
-            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.date_ship" value="{{shipment.date_ship}}" readonly=""></div>
-            </td>
-            <td class="rowTd" data-title="'Est Arrival'" filter="{ 'est_arrival': 'text' }" sortable="'est_arrival'">
-                <span ng-if="!shipment.$edit">{{shipment.est_arrival}}</span>
-            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.est_arrival" value="{{shipment.est_arrival}}" readonly=""></div>
-            </td>
+  <tbody ng-repeat="shipment in $data">
+    <tr id="tr{{shipment.shipment_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
+      <td class="rowTd" data-title="'ID'" sortable="'shipment_id'">
+        <span ng-if="!shipment.$edit">{{shipment.shipment_id}}</span>
+        <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.shipment_id" value="{{shipment.shipment_id}}" readonly></div>
+      </td>
+      <td class="rowTd" data-title="'Tracking Number'" filter="{ 'tracking_number': 'text' }">
+        <span ng-if="!shipment.$edit">{{shipment.tracking_number}}</span>
+        <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.tracking_number" value="{{shipment.tracking_number}}" /></div>
+      </td>
+      <td class="rowTd" data-title="'Pckg Type'" filter="{ 'package_type': 'text' }">
+        <span ng-if="!shipment.$edit">{{shipment.package_type}}</span>
+        <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.package_type" value="{{shipment.package_type}}" /></div>
+      </td>
+      <td class="rowTd" data-title="'Pckg Rate'" filter="{ 'package_rate': 'text' }">
+        <span ng-if="!shipment.$edit">{{shipment.package_rate}}</span>
+        <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.package_rate" value="{{shipment.package_rate}}" /></div>
+      </td>
+      <td class="rowTd" data-title="'PO Last'" filter="{ 'last_post_office': 'text' }">
+        <span ng-if="!shipment.$edit">{{shipment.last_post_office}}</span>
+        <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.last_post_office" value="{{shipment.last_post_office}}" /></div>
+      </td>
+      <td class="rowTd" data-title="'Cust Name'">
+       <span ng-if="!shipment.$edit">{{shipment.customer_id.first_name}} {{shipment.customer_id.last_name}}</span>
+       <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.last_name" value="{{shipment.customer_id.first_name}} {{shipment.customer_id.last_name}}" /></div>
+     </td>
+     <td class="rowTd" data-title="'Cust Phone'" filter="{ 'shipment.customer_id.phone_number': 'text' }" sortable="'shipment.customer_id.phone_number'">
+      <span ng-if="!shipment.$edit">{{shipment.customer_id.phone_number}}</span>
+      <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.customer_id.phone_number" value="{{shipment.customer_id.phone_number}}" /></div>
+    </td>
+    <td class="rowTd" data-title="'Rec. Address'" filter="{ 'reciever_address.street_line1': 'text' }" sortable="'reciever_address.street_line1'">
+      <span ng-if="!shipment.$edit">{{shipment.reciever_address.street_line1}}</span>
+      <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.reciever_address.street_line1" value="{{shipment.reciever_address.street_line1}}" /></div>
+    </td>
+    <td class="rowTd" data-title="'Rec. Name'" filter="{ 'receiver_name': 'text' }" sortable="'receiver_name'">
+      <span ng-if="!shipment.$edit">{{shipment.receiver_name}}</span>
+      <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.receiver_name" value="{{shipment.receiver_name}}" readonly=""></div>
+    </td>
+    <td class="rowTd" data-title="'Date Shipped'" filter="{ 'date_ship': 'text' }" sortable="'date_ship'">
+      <span ng-if="!shipment.$edit">{{shipment.date_ship}}</span>
+      <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.date_ship" value="{{shipment.date_ship}}" readonly=""></div>
+    </td>
+    <td class="rowTd" data-title="'Est Arrival'" filter="{ 'est_arrival': 'text' }" sortable="'est_arrival'">
+      <span ng-if="!shipment.$edit">{{shipment.est_arrival}}</span>
+      <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.est_arrival" value="{{shipment.est_arrival}}" readonly=""></div>
+    </td>
 
-            <td class="rowTd" data-title="'Actions'">
-                <a ng-if="!shipment.$edit" href="" class="btn btn-default btn-xs" ng-click="shipment.$edit = true">Edit</a>
-                <input type="submit" ng-show="shipment.$edit" href="" class="btn btn-primary btn-xs" ng-click="shipment.$edit = false; sendData(shipment)">
-            </td>
-          </tr>
-          
-    </tbody>
-    </table>
+    <td class="rowTd" data-title="'Actions'">
+      <a ng-if="!shipment.$edit" href="" class="btn btn-default btn-xs" ng-click="shipment.$edit = true">Edit</a>
+      <input type="submit" ng-show="shipment.$edit" href="" class="btn btn-primary btn-xs" ng-click="shipment.$edit = false; sendData(shipment)">
+    </td>
+  </tr>
+
+</tbody>
+</table>

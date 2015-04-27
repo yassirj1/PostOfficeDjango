@@ -198,6 +198,19 @@ angular.module('postOfficeApp')
 		});
 
 
+		$scope.selectCustomer = [];
+
+		poService.getCustomers().success( function (response) {
+			$scope.selectCustomer = response;
+		});
+
+		$scope.selectAddress = [];
+
+		poService.getAddresses().success( function (response) {
+			$scope.selectAddress = response;
+		});
+
+
 		$scope.tableParams = new ngTableParams({
 			page: 1,
 			count: 10
@@ -243,7 +256,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertAddress = function(data) {
-		return $http.post('api/addresses', data);
+		return $http.post('api/addresses/', data);
 	};
 
 	poService.updateAddress = function(data) {
@@ -255,7 +268,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertShipments = function(data) {
-		return $http.post('api/shipments', data);
+		return $http.post('api/shipments/', data);
 	};
 
 	poService.updateShipments = function(data) {
@@ -291,7 +304,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertDeliveryRoutes = function(data) {
-		return $http.post('api/deliveryroutes', data);
+		return $http.post('api/deliveryroutes/', data);
 	};
 
 	poService.updateDeliveryRoutes = function(data) {
@@ -303,7 +316,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertIncomingShipments = function(data) {
-		return $http.post('api/incomingshipments', data);
+		return $http.post('api/incomingshipments/', data);
 	};
 
 	poService.updateIncomingShipments = function(data) {
