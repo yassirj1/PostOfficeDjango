@@ -83,3 +83,49 @@ angular.module('postOfficeApp')
 
 
 }]);
+
+angular.module('postOfficeApp')
+.controller('shipmentsTableCtrl', [ '$scope', '$filter', 'ngTableParams', 'poService',  
+	function ($scope, $filter, ngTableParams, poService) {
+		var data = [];
+
+		poService.getShipments().success( function (response) {
+			data = response;
+		});
+
+
+		$scope.tableParams = new ngTableParams({
+			page: 1,
+			count: 10
+		},{
+			total: data.length,
+			getData: function($defer, params) {
+				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
+				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+			}
+		});
+		
+		$scope.formData = {};
+		$scope.sendData = function(customer) {
+			$scope.formData = angular.copy(customer)
+			poService.updateShipments($scope.formData).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+		$scope.postForm = {};
+		$scope.postData = function(customer) {
+			$scope.postForm = angular.copy(customer)
+			poService.insertShipments($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+
+}]);

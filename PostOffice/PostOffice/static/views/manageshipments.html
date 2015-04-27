@@ -1,108 +1,73 @@
-<div class="row">
-    <div class="col-lg-4">
-        <center><h1>Create a Shipment</h1>
-            <p>Search for an existing customer by their phone number.</p>
-            <div class="input-group">
-               <input type="text" class="form-control" placeholder="Phone Number">
-               <span class="input-group-btn">
-                 <button class="btn btn-default" type="button">Search</button>
-             </span>
-             
-         </div>
-         <br>
-         <h4>Or</h4>
-         <a href="create_customer.html" class="btn btn-default" id="menu-toggle">Create a New Customer</a>
-     </center></div>
- </div>  
- 
- 
- 
- 
+<div class="container">
+<form class="form-inline" role="form" ng-submit="postData(shipment)">
+    <div class="form-group">
+      <label for="FirstName">First Name:</label>
+      <input ng-model="shipment.first_name" type="text" class="form-control" id="FirstName" placeholder="Enter first name">
+    </div>
+    <div class="form-group">
+      <label for="LastName">Last Name:</label>
+      <input ng-model="shipment.last_name" type="text" class="form-control" id="LastName" placeholder="Enter last name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input ng-model="shipment.shipment_email" type="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="PhoneNumber">Phone Number</label>
+      <input ng-model="shipment.phone_number" type="text" class="form-control" id="PhoneNumber" placeholder="Enter phone number">
+    </div>
+    <input type="submit" class="btn btn-default" ng-click"postData(shipment)">
+  </form>
+  </div>
+  <br/>
 
-<div class="row">
-	<div class="col-lg-4">
-		<center><h1>Create a Shipment</h1>
-			<form> 
-				<h3>Recipient Address</h3>
-				<div class="input-group">
-					<label class="control-label">FIRST NAME</label>
-					<input type="text" class="form-control" placeholder="First Name">
 
-					<label class="control-label">LAST NAME</label>
-					<input type="text" class="form-control" placeholder="Last Name">
 
-					<label class="control-label">ADDRESS</label>
-					<input type="text" class="form-control" placeholder="Address 1">
-					<input type="text" class="form-control" placeholder="Address 2">
-					<input type="text" class="form-control" placeholder="Address 3">
+<table ng-table="tableParams" show-filter="true" class="table">
+    <tbody ng-repeat="shipment in $data">
+        <tr id="tr{{shipment.shipment_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
+            <td class="rowTd" data-title="'ID'" sortable="'shipment_id'">
+                <span ng-if="!shipment.$edit">{{shipment.shipment_id}}</span>
+                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.shipment_id" value="{{shipment.shipment_id}}" readonly></div>
+            </td>
+            <td class="rowTd" data-title="'Tracking Number'" filter="{ 'tracking_number': 'text' }">
+                <span ng-if="!shipment.$edit">{{shipment.tracking_number}}</span>
+                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.tracking_number" value="{{shipment.tracking_number}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'PO Shipped'" filter="{ 'post_office_shipped_from': 'text' }">
+                <span ng-if="!shipment.$edit">{{shipment.post_office_shipped_from}}</span>
+                <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.post_office_shipped_from" value="{{shipment.post_office_shipped_from}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Cust Name'">
+                 <span ng-if="!shipment.$edit">{{shipment.customer_id.first_name}} {{shipment.customer_id.last_name}}</span>
+                 <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.last_name" value="{{shipment.customer_id.first_name}} {{shipment.customer_id.last_name}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Cust Phone'" filter="{ 'shipment.customer_id.phone_number': 'text' }" sortable="'shipment.customer_id.phone_number'">
+                <span ng-if="!shipment.$edit">{{shipment.customer_id.phone_number}}</span>
+            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.customer_id.phone_number" value="{{shipment.customer_id.phone_number}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Rec. Address'" filter="{ 'reciever_address.street_line1': 'text' }" sortable="'reciever_address.street_line1'">
+                <span ng-if="!shipment.$edit">{{shipment.reciever_address.street_line1}}</span>
+            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.reciever_address.street_line1" value="{{shipment.reciever_address.street_line1}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Rec. Name'" filter="{ 'receiver_name': 'text' }" sortable="'receiver_name'">
+                <span ng-if="!shipment.$edit">{{shipment.receiver_name}}</span>
+            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.receiver_name" value="{{shipment.receiver_name}}" readonly=""></div>
+            </td>
+            <td class="rowTd" data-title="'Date Shipped'" filter="{ 'date_ship': 'text' }" sortable="'date_ship'">
+                <span ng-if="!shipment.$edit">{{shipment.date_ship}}</span>
+            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.date_ship" value="{{shipment.date_ship}}" readonly=""></div>
+            </td>
+            <td class="rowTd" data-title="'Est Arrival'" filter="{ 'est_arrival': 'text' }" sortable="'est_arrival'">
+                <span ng-if="!shipment.$edit">{{shipment.est_arrival}}</span>
+            <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.est_arrival" value="{{shipment.est_arrival}}" readonly=""></div>
+            </td>
 
-					<label class="control-label">CITY</label>
-					<input type="text" class="form-control" placeholder="City">
-
-					<label class="control-label">STATE</label>
-					<select class="form-control">
-						<option>    AL</option>
-						<option>	AK</option>
-						<option>	AZ</option>
-						<option>	AR</option>
-						<option>	CA</option>
-						<option>	CO</option>
-						<option>	CT</option>
-						<option>	DE</option>
-						<option>	FL</option>
-						<option>	GA</option>
-						<option>	HI</option>
-						<option>	ID</option>
-						<option>	IL</option>
-						<option>	IN</option>
-						<option>	IA</option>
-						<option>	KS</option>
-						<option>	KY</option>
-						<option>	LA</option>
-						<option>	ME</option>
-						<option>	MD</option>
-						<option>	MA</option>
-						<option>	MI</option>
-						<option>	MN</option>
-						<option>	MS</option>
-						<option>	MO</option>
-						<option>	MT</option>
-						<option>	NE</option>
-						<option>	NV</option>
-						<option>	NH</option>
-						<option>	NJ</option>
-						<option>	NM</option>
-						<option>	NY</option>
-						<option>	NC</option>
-						<option>	ND</option>
-						<option>	OH</option>
-						<option>	OK</option>
-						<option>	OR</option>
-						<option>	PA</option>
-						<option>	RI</option>
-						<option>	SC</option>
-						<option>	SD</option>
-						<option>	TN</option>
-						<option>	TX</option>
-						<option>	UT</option>
-						<option>	VT</option>
-						<option>	VA</option>
-						<option>	WA</option>
-						<option>	WV</option>
-						<option>	WI</option>
-						<option>	WY</option>
-					</select>
-					<br>
-					<label class="control label">ZIPCODE</label>
-					<input type="text" class="form-control" placeholder="Zipcode">
-					<label class="control label">COUNTRY</label>
-					<select class="form-control">
-						<option>US</option>
-						<option>CA</option>
-						<option>MX</option>
-					</select>
-				</div>
-			</form>
-		</center></div>
-	</div> 
-
+            <td class="rowTd" data-title="'Actions'">
+                <a ng-if="!shipment.$edit" href="" class="btn btn-default btn-xs" ng-click="shipment.$edit = true">Edit</a>
+                <input type="submit" ng-show="shipment.$edit" href="" class="btn btn-primary btn-xs" ng-click="shipment.$edit = false; sendData(shipment)">
+            </td>
+          </tr>
+          
+    </tbody>
+    </table>

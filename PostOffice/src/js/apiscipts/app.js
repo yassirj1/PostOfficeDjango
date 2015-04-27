@@ -47,7 +47,8 @@ angular.module('postOfficeApp')
 	})
 	.state('manageshipments', {
 		url: '/manageshipments',
-		templateUrl: 'static/views/manageshipments.html'
+		templateUrl: 'static/views/manageshipments.html',
+		controller: 'shipmentsTableCtrl'
 	})
 	.state('manageshipments.createcustomer', {
 		url: '/createcustomer',

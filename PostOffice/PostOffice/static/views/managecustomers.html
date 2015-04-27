@@ -46,6 +46,10 @@
                 <span ng-if="!customer.$edit">{{customer.phone_number}}</span>
             <div ng-if="customer.$edit"><input form="putForm" class="form-control" type="text" ng-model="customer.phone_number" value="{{customer.phone_number}}" /></div>
             </td>
+            <td class="rowTd" data-title="'Date Created'" filter="{ 'date_joined': 'text' }" sortable="'date_joined'">
+                <span ng-if="!customer.$edit">{{customer.date_joined}}</span>
+            <div ng-if="customer.$edit"><input form="putForm" class="form-control" type="text" ng-model="customer.date_joined" value="{{customer.joined}}" readonly=""></div>
+            </td>
             <td class="rowTd" data-title="'Actions'">
                 <a ng-if="!customer.$edit" href="" class="btn btn-default btn-xs" ng-click="customer.$edit = true">Edit</a>
                 <input type="submit" ng-show="customer.$edit" href="" class="btn btn-primary btn-xs" ng-click="customer.$edit = false; sendData(customer)">

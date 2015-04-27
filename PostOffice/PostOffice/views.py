@@ -6,7 +6,7 @@ from PostOffice.models import Address, Shipments, Customer, Driver, Incoming_Shi
 from django.contrib.auth.models import User
 from PostOffice.serializers import (AddressOutputSerializer, AddressInputSerializer, ShipmentsInputSerializer,
 	ShipmentsOutputSerializer, CustomerOutputSerializer, CustomerInputSerializer,
-	DriverSerializer, IncomingShipmentsSerializer, DeliveryRoutesSerializer
+	DriverOutputSerializer,DriverInputSerializer ,IncomingShipmentsSerializer, DeliveryRoutesSerializer
 )
 from rest_framework.response import Response
 
@@ -106,12 +106,16 @@ class DriverView(generics.ListCreateAPIView):
 	"""
 	queryset = Driver.objects.all()
 	model = Driver
-	serializer_class= DriverSerializer
+	
+	def get_serializer_class(self):
+		if self.request.method == 'POST':
+			return DriverInputSerializer
+		return DriverOutputSerializer
 
 class DriverInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Driver.objects.all()
 	model = Driver
-	serializer_class = DriverSerializer
+	serializer_class = DriverOutputSerializer
 
 class DeliveryRoutesView(generics.ListCreateAPIView):
 	"""
