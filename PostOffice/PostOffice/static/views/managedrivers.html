@@ -1,5 +1,5 @@
 <div class="container">
-<form class="form-inline" role="form" ng-submit="postData(customer)">
+<form class="form-inline" role="form" ng-submit="postData(driver)">
     <div class="form-group">
       <label for="DriverName">Name:</label>
       <input ng-model="driver.driver_name" type="text" class="form-control" id="DriverName" placeholder="Enter Driver Name">
@@ -10,10 +10,10 @@
     </div>
     <div class="form-group">
       <label for="PhoneNumber">Phone Number:</label>
-      <input ng-model="driver.driver_phone_number" type="email" class="form-control" id="PhoneNumber" placeholder="Enter Phone Number">
+      <input ng-model="driver.driver_phone_number" type="text" class="form-control" id="PhoneNumber" placeholder="Enter Phone Number">
     </div>
     <div class="form-group">
-      <label for="DrugTestPassed">Drug Test Passed</label>
+      <label for="DrugTestPassed">Drug Test Passed:</label>
       <select name="state" class="form-control">
             <option value="TRUE">YES</option>
             <option value="FALSE">NO</option>
@@ -28,23 +28,23 @@
         <tr id="tr{{driver.driver_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
             <td class="rowTd" data-title="'ID'" sortable="'driver_id'">
                 <span ng-if="!driver.$edit">{{driver.driver_id}}</span>
-                <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_id" readonly></div>
+                <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_id" value="{{driver.driver_id}}" readonly></div>
             </td>
            <td class="rowTd" data-title="'SSN'" sortable="'driver_ssn'">
                 <span ng-if="!driver.$edit">{{driver.driver_ssn}}</span>
-                <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_ssn" readonly></div>
+                <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_ssn" value="{{driver.driver_ssn}}"readonly></div>
             </td>
-            <td class="rowTd" data-title="'Name'" filter="{ 'river_name': 'text' }" sortable="'driver_name'">
+            <td class="rowTd" data-title="'Name'" filter="{ 'driver_name': 'text' }" sortable="'driver_name'">
                 <span ng-if="!driver.$edit">{{driver.driver_name}}</span>
-                <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_name" /></div>
+                <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_name" value="{{driver.driver_name}}" /></div>
             </td>
             <td class="rowTd" data-title="'Phone'"  filter="{ 'driver_phone_number': 'text' }" sortable="'driver_phone_number'">
                 <span ng-if="!driver.$edit">{{driver.phone_number}}</span>
-            <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_phone_number" /></div>
+            <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.driver_phone_number" value="{{driver.driver_phone_number}}"/></div> 
             </td>
             <td class="rowTd" data-title="'Drug test Passed'" filter="{ 'drug_test_passed': 'text' }" sortable="'drug_test_passed'">
                 <span ng-if="!driver.$edit">{{driver.drug_test_passed}}</span>
-            <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.drug_test_passed" /></div>
+            <div ng-if="driver.$edit"><input form="putForm" class="form-control" type="text" ng-model="driver.drug_test_passed" value="{{driver.driver_drug_passed}}" /></div>
             </td>
             <td class="rowTd" data-title="'Actions'">
                 <a ng-if="!driver.$edit" href="" class="btn btn-default btn-xs" ng-click="driver.$edit = true">Edit</a>
