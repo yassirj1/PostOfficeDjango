@@ -32,7 +32,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertDrivers = function(data) {
-		return $http.post('api/drivers', data);
+		return $http.post('api/drivers/', data);
 	};
 
 	poService.updateDrivers = function(data) {

@@ -72,14 +72,31 @@ angular.module('postOfficeApp')
 			total: data.length,
 			getData: function($defer, params) {
 				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
 				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
 			}
 		});
+		
+		$scope.formData = {};
+		$scope.sendData = function(driver) {
+			$scope.formData = angular.copy(driver)
+			poService.updateDrivers($scope.formData).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
 
-		$scope.sendData = function(putForm) {
-			console.log($scope.driver);
-			console.log($scope.putForm);
-		}
+		$scope.postForm = {};
+		$scope.postData = function(driver) {
+			$scope.postForm = angular.copy(driver)
+			poService.insertDrivers($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
 
 
 }]);
