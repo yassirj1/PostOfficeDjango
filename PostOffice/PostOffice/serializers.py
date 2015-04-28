@@ -79,11 +79,27 @@ class DeliveryRoutesSerializer(serializers.ModelSerializer):
         model = Delivery_Routes
         fields = ('delivery_route_id', 'zipcode', 'shipments_carried', 'driver_id', 'time_left', 'time_returned', 'last_location')
 
-class IncomingShipmentsSerializer(serializers.ModelSerializer):
+class IncomingInputShipmentsSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Incoming_Shipments
 		fields = ('route_id', 'post_office_shipping_from', 'post_office_shipping_to', 'route_type')
 
 
+class IncomingOutputShipmentsSerializer(serializers.ModelSerializer):
+    route_type = serializers.SerializerMethodField()
+    post_office_shipping_from = serializers.SerializerMethodField()
+    post_office_shipping_to = serializers.SerializerMethodField()
+    class Meta:
+        model = Incoming_Shipments
+        fields = ('route_id', 'post_office_shipping_from', 'post_office_shipping_to', 'route_type')
+
+    def get_route_type(self,obj):
+        return obj.get_route_type_display()
+
+    def get_post_office_shipping_from(self,obj):
+        return obj.get_post_office_shipping_from_display()
+
+    def get_post_office_shipping_to(self,obj):
+        return obj.get_post_office_shipping_to_display()
 
 

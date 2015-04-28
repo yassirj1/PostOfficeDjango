@@ -27,7 +27,8 @@ angular.module('postOfficeApp')
 	})
 	.state('managebranch', {
 		url: '/managebranch',
-		templateUrl: 'static/views/managebranch.html'
+		templateUrl: 'static/views/managebranch.html',
+		controller: 'branchTableCtrl'
 	})
 	.state('manageshipments', {
 		url: '/manageshipments',

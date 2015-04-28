@@ -1,7 +1,37 @@
 <div class="container">
-<h3 align="left">Incoming Shipments</h3>
-</div>
-  <br/>
+<h3 align="left">Create Inter-office Shipments</h3>
+  <form class="form-inline" role="form" ng-submit="postData(shipment)">
+    <div class="form-group">
+      <label for="poFrom">From:</label>
+      <select id="poFrom" ng-model="shipment.post_office_shipping_from" class="form-control">
+            <option value="77025">Houston</option>
+            <option value="75032">Dallas</option>
+            <option value="78721">Austin</option>
+            <option value="78205">San Antonio</option>
+            <option value="79922">El Paso</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="poTo">To:</label>
+      <select id="poTo" ng-model="shipment.post_office_shipping_to" class="form-control">
+            <option value="77025">Houston</option>
+            <option value="75032">Dallas</option>
+            <option value="78721">Austin</option>
+            <option value="78205">San Antonio</option>
+            <option value="79922">El Paso</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="poType">Route Type:</label>
+      <select id="poType" ng-model="shipment.route_type" class="form-control">
+            <option value="1">Ground</option>
+            <option value="2">Air</option>
+            <option value="3">Sea</option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-default" ng-click"postData(shipment)">
+  </form>
+  </div>
 
 
 

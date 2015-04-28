@@ -6,7 +6,7 @@ from PostOffice.models import Address, Shipments, Customer, Driver, Incoming_Shi
 from django.contrib.auth.models import User
 from PostOffice.serializers import (AddressOutputSerializer, AddressInputSerializer, ShipmentsInputSerializer,
 	ShipmentsOutputSerializer, CustomerOutputSerializer, CustomerInputSerializer,
-	DriverOutputSerializer,DriverInputSerializer ,IncomingShipmentsSerializer, DeliveryRoutesSerializer
+	DriverOutputSerializer,DriverInputSerializer ,IncomingOutputShipmentsSerializer, IncomingInputShipmentsSerializer, DeliveryRoutesSerializer
 )
 from rest_framework.response import Response
 
@@ -93,12 +93,16 @@ class IncomingShipmentsView(generics.ListCreateAPIView):
 	"""
 	queryset = Incoming_Shipments.objects.all()
 	model = Incoming_Shipments
-	serializer_class= IncomingShipmentsSerializer
+	
+	def get_serializer_class(self):
+		if self.request.method == 'POST':
+			return IncomingInputShipmentsSerializer
+		return IncomingOutputShipmentsSerializer
 
 class IncomingShipmentsInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Incoming_Shipments.objects.all()
 	model = Incoming_Shipments
-	serializer_class = IncomingShipmentsSerializer
+	serializer_class = IncomingOutputShipmentsSerializer
 
 class DriverView(generics.ListCreateAPIView):
 	"""
@@ -130,7 +134,3 @@ class DeliveryRoutesInstanceView(generics.RetrieveUpdateDestroyAPIView):
 	model = Delivery_Routes
 	serializer_class = DeliveryRoutesSerializer
 
-
-# def address_instance_view(request, pk):
-#     address = get_object_or_404(Address, address_id=pk)
-#     return render_to_response('address_instance.html', {"address" : address}, context_instance=RequestContext(request))

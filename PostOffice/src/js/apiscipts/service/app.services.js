@@ -63,7 +63,7 @@ angular.module('postOfficeApp')
 		return $http.put('api/deliveryroutes'  + '/' + data.delivery_route_id, data)
 	};
 
-	poService.getIncominingShipments = function() {
+	poService.getIncomingShipments = function() {
 		return $http.get('api/incomingshipments');
 	};
 

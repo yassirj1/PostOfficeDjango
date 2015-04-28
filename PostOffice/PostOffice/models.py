@@ -102,7 +102,7 @@ class Incoming_Shipments_Manager(models.Manager):
 
 class Incoming_Shipments(models.Model):
 	objects = Incoming_Shipments_Manager()
-	route_id = models.IntegerField(max_length=10, primary_key=True)
+	route_id = models.AutoField(primary_key=True)
 	post_office_shipping_from = models.IntegerField(choices=POST_OFFICE_SHIPPED_FROM, default=77025)
 	post_office_shipping_to = models.IntegerField(choices=POST_OFFICE_SHIPPED_FROM, default=75032)
 	route_type = models.IntegerField(choices=SHIPMENT_TYPE, default=1)
