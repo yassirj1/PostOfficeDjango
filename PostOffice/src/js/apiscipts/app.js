@@ -25,22 +25,6 @@ angular.module('postOfficeApp')
 		templateUrl: 'static/views/managedrivers.html',
 		controller: 'driverTableCtrl'
 	})
-	.state('managedrivers.createdriver', {
-		url: '/createdriver',
-		templateUrl: 'static/views/createdriver.html'
-	})
-	.state('managedrivers.viewdriver', {
-		url: '/viewdriver',
-		templateUrl: 'static/views/viewdriver.html'
-	})
-	.state('managedrivers.viewroute', {
-		url: '/viewroute',
-		templateUrl: 'static/views/viewroute.html'
-	})
-	.state('managedrivers.editdriver', {
-		url: '/editdriver',
-		templateUrl: 'static/views/editdriver.html'
-	})
 	.state('managebranch', {
 		url: '/managebranch',
 		templateUrl: 'static/views/managebranch.html'
@@ -49,26 +33,6 @@ angular.module('postOfficeApp')
 		url: '/manageshipments',
 		templateUrl: 'static/views/manageshipments.html',
 		controller: 'shipmentsTableCtrl'
-	})
-	.state('manageshipments.createcustomer', {
-		url: '/createcustomer',
-		templateUrl: 'static/views/createcustomer.html'
-	})
-	.state('mangeshipments.viewcustomer', {
-		url: '/viewcustomer',
-		templateUrl: 'static/views/viewcustomer'
-	})
-	.state('mangeshipments.editcustomer', {
-		url: '/editcustomer',
-		templateUrl: 'static/views/editcustomer'
-	})
-	.state('manageshipments.createshipment', {
-		url: '/createshipment',
-		templateUrl: 'static/views/createshipment'
-	})
-	.state('manageshipments.viewshipment', {
-		url: '/viewshipment',
-		templateUrl: 'static/views/createshipment'
 	})
 	.state('managecustomers', {
 		url:'/managecustomers',

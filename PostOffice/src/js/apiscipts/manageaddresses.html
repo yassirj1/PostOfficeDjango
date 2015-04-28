@@ -1,0 +1,122 @@
+<div class="container">
+<h3 align="left">Create Address</h3>
+  <form class="form-inline" role="form" ng-submit="postData(address)">
+    <div class="form-group">
+      <label for="customer">Phone Number:</label>
+      <select id="customer" ng-model="address.customer_id" ng-options="customer.customer_id as customer.phone_number for customer in selectCustomer"></select>
+    </div>
+    <div class="form-group">
+      <label for="addressStreet">Street: </label>
+      <input ng-model="address.street_line1" type="text" class="form-control" id="addressStreet" placeholder="Enter street address">
+    </div>
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input ng-model="address.city" type="text" class="form-control" id="city" placeholder="Enter city">
+    </div>
+    <div class="form-group">
+      <label for="state">State:</label>
+       <select ng-model="address.state"  id="state" class="form-control">
+                <option value="00">AL</option>
+                <option value="01">AK</option>
+                <option value="02">AZ</option>
+                <option value="03">AR</option>
+                <option value="04">CA</option>
+                <option value="05">CO</option>
+                <option value="06">CT</option>
+                <option value="07">DE</option>
+                <option value="08">DC</option>
+                <option value="09">FL</option>
+                <option value="10">GA</option>
+                <option value="11">HI</option>
+                <option value="12">ID</option>
+                <option value="13">IL</option>
+                <option value="14">IN</option>
+                <option value="15">IA</option>
+                <option value="16">KS</option>
+                <option value="17">KY</option>
+                <option value="18">LA</option>
+                <option value="19">ME</option>
+                <option value="20">MD</option>
+                <option value="21">MA</option>
+                <option value="21">MI</option>
+                <option value="22">MN</option>
+                <option value="23">MS</option>
+                <option value="24">MO</option>
+                <option value="25">MT</option>
+                <option value="26">NE</option>
+                <option value="27">NV</option>
+                <option value="28">NH</option>
+                <option value="29">NJ</option>
+                <option value="30">NM</option>
+                <option value="31">NY</option>
+                <option value="32">NC</option>
+                <option value="33">ND</option>
+                <option value="34">OH</option>
+                <option value="35">OK</option>
+                <option value="36">OR</option>
+                <option value="37">PA</option>
+                <option value="38">RI</option>
+                <option value="39">SC</option>
+                <option value="40">SD</option>
+                <option value="41">TN</option>
+                <option value="42">TX</option>
+                <option value="43">UT</option>
+                <option value="44">VT</option>
+                <option value="45">VA</option>
+                <option value="46">WA</option>
+                <option value="47">WV</option>
+                <option value="48">WI</option>
+                <option value="49">WY</option>
+            </select>
+    </div>
+    <div class="form-group">
+      <label for="country">Country:</label>
+      <select id="country" ng-model="address.country" class="form-control">
+            <option value="1">USA</option>
+            <option value="2">Mexico</option>
+            <option value="3">Canada</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="zipcode">Zipcode:</label>
+      <input ng-model="address.zipcode" type="text" class="form-control" id="zipcode" placeholder="Enter zipcode">
+    </div>
+    <input type="submit" class="btn btn-default" ng-click"postData(address)">
+  </form>
+  </div>
+
+  <br/>
+<!--
+<table ng-table="tableParams" show-filter="true" class="table">
+    <tbody ng-repeat="address in $data">
+        <tr id="tr{{address.address_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
+            <td class="rowTd" data-title="'ID'" sortable="'address_id'">
+                <span ng-if="!address.$edit">{{address.address_id}}</span>
+                <div ng-if="address.$edit"><input form="putForm" class="form-control" type="text" ng-model="address.address_id" value="{{address.address_id}}" readonly></div>
+            </td>
+           <td class="rowTd" data-title="'SSN'"  filter="{ 'address_ssn': 'text' }" sortable="'address_ssn'">
+                <span ng-if="!address.$edit">{{address.address_ssn}}</span>
+                <div ng-if="address.$edit"><input form="putForm" class="form-control" type="text" ng-model="address.address_ssn" value="{{address.address_ssn}}"readonly></div>
+            </td>
+            <td class="rowTd" data-title="'Name'" filter="{ 'address_name': 'text' }" sortable="'address_name'">
+                <span ng-if="!address.$edit">{{address.address_name}}</span>
+                <div ng-if="address.$edit"><input form="putForm" class="form-control" type="text" ng-model="address.address_name" value="{{address.address_name}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Phone'"  filter="{ 'address_phone_number': 'text' }" sortable="'address_phone_number'">
+                <span ng-if="!address.$edit">{{address.address_phone_number}}</span>
+            <div ng-if="address.$edit"><input form="putForm" class="form-control" type="text" ng-model="address.address_phone_number" value="{{address.address_phone_number}}"/></div> 
+            </td>
+            <td class="rowTd" data-title="'Drug test Passed'" filter="{ 'drug_test_passed': 'text' }" sortable="'drug_test_passed'">
+                <span ng-if="!address.$edit">{{address.drug_test_passed}}</span>
+            <div ng-if="address.$edit"><input form="putForm" class="form-control" type="text" ng-model="address.drug_test_passed" value="{{address.address_drug_passed}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Actions'">
+                <a ng-if="!address.$edit" href="" class="btn btn-default btn-xs" ng-click="address.$edit = true">Edit</a>
+                <a type="submit" ng-if="address.$edit" href="" class="btn btn-primary btn-xs" ng-click="address.$edit = false; sendData(address)">Save</a>
+            </td>
+          </tr>
+          
+    </tbody>
+    </table>
+
+  -->

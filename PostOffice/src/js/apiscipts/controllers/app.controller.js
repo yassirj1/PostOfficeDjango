@@ -159,3 +159,55 @@ angular.module('postOfficeApp')
 
 
 }]);
+
+angular.module('postOfficeApp')
+.controller('addressesTableCtrl', [ '$scope', '$filter', 'ngTableParams', 'poService',  
+	function ($scope, $filter, ngTableParams, poService) {
+		var data = [];
+
+		poService.getAddresses().success( function (response) {
+			data = response;
+		});
+
+		$scope.selectCustomer = [];
+
+		poService.getCustomers().success( function (response) {
+			$scope.selectCustomer = response;
+		});
+
+
+		$scope.tableParams = new ngTableParams({
+			page: 1,
+			count: 10
+		},{
+			total: data.length,
+			getData: function($defer, params) {
+				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
+				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+			}
+		});
+		
+		$scope.formData = {};
+		$scope.sendData = function(address) {
+			$scope.formData = angular.copy(address)
+			poService.updateAddress($scope.formData).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+		$scope.postForm = {};
+		$scope.postData = function(address) {
+			$scope.postForm = angular.copy(address)
+			poService.insertAddress($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+
+}]);

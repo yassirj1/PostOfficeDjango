@@ -141,7 +141,7 @@ class Address(models.Model):
 	zipcode = models.IntegerField(max_length=5)
 
 	def __unicode__(self):
-		return '{} {}'.format(self.street_line1, self.street_line2, self.street_line3 , self.street_line4 , self.city , self.state, self.country , self.zipcode)
+		return '{} {}'.format(self.street_line1, self.city , self.state, self.country , self.zipcode)
 
 
 class Shipments_Manager(models.Manager):

@@ -7,39 +7,48 @@ angular.module('postOfficeApp', [
 	]);
 
 angular.module('postOfficeApp')
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
 	$stateProvider
-		.state('home', {
-			url:'',
-			templateUrl: 'static/views/partial-home.html'
-		})
-		.state('home.tracking', {
-			url: '/tracking',
-			templateUrl: 'static/views/tracker.html',
-			controller: 'trackingCtrl'
-		})
-		.state('managedrivers', {
-			url: '/managedrivers',
-			templateUrl: 'static/views/managedrivers.html'
-		})
-		.state('managebranch', {
-			url: '/managebranch',
-			templateUrl: 'static/views/managebranch.html'
-		})
-		.state('manageshipments', {
-			url: '/manageshipments',
-			templateUrl: 'static/views/manageshipments.html'
-		})
-		.state('managecustomers', {
-			url:'/managecustomers',
-			templateUrl: 'static/views/managecustomers.html',
-			controller: 'customerTableCtrl'
-		})
-		.state('reports', {
-			url: '/reports',
-			templateUrl: 'static/views/reports.html'
-		});
-		$urlRouterProvider.otherwise("")
+	.state('home', {
+		url:'',
+		templateUrl: 'static/views/partial-home.html'
+	})
+	.state('home.tracking', {
+		url: '/tracking',
+		templateUrl: 'static/views/tracker.html',
+		controller: 'trackingCtrl'
+	})
+	.state('managedrivers', {
+		url: '/managedrivers',
+		templateUrl: 'static/views/managedrivers.html',
+		controller: 'driverTableCtrl'
+	})
+	.state('managebranch', {
+		url: '/managebranch',
+		templateUrl: 'static/views/managebranch.html'
+	})
+	.state('manageshipments', {
+		url: '/manageshipments',
+		templateUrl: 'static/views/manageshipments.html',
+		controller: 'shipmentsTableCtrl'
+	})
+	.state('managecustomers', {
+		url:'/managecustomers',
+		templateUrl: 'static/views/managecustomers.html',
+		controller: 'customerTableCtrl'
+	})
+	.state('register', {
+		url:'/register',
+		templateUrl: 'static/views/register.html'
+	})
+	.state('manageaddresses', {
+		url: '/addresses',
+		templateUrl: 'static/views/manageaddresses.html',
+		controller: 'addressesTableCtrl'
+	});
+	$urlRouterProvider.otherwise("")
 });
 'use strict';
 
@@ -69,14 +78,188 @@ angular.module('postOfficeApp')
 			total: data.length,
 			getData: function($defer, params) {
 				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
 				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
 			}
 		});
+		
+		$scope.formData = {};
+		$scope.sendData = function(customer) {
+			$scope.formData = angular.copy(customer)
+			poService.updateCustomers($scope.formData).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
 
-		$scope.sendData = function(putForm) {
-			console.log($scope.customer);
-			console.log($scope.putForm);
-		}
+		$scope.postForm = {};
+		$scope.postData = function(customer) {
+			$scope.postForm = angular.copy(customer)
+			poService.insertCustomers($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+
+}]);
+
+angular.module('postOfficeApp')
+.controller('driverTableCtrl', [ '$scope', '$filter', 'ngTableParams', 'poService',  
+	function ($scope, $filter, ngTableParams, poService) {
+		var data = [];
+
+		poService.getDrivers().success( function (response) {
+			data = response;
+		});
+
+
+		$scope.tableParams = new ngTableParams({
+			page: 1,
+			count: 10
+		},{
+			total: data.length,
+			getData: function($defer, params) {
+				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
+				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+			}
+		});
+		
+		$scope.formData = {};
+		$scope.sendData = function(driver) {
+			$scope.formData = angular.copy(driver)
+			poService.updateDrivers($scope.formData).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+		$scope.postForm = {};
+		$scope.postData = function(driver) {
+			$scope.postForm = angular.copy(driver)
+			poService.insertDrivers($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+
+}]);
+
+angular.module('postOfficeApp')
+.controller('shipmentsTableCtrl', [ '$scope', '$filter', 'ngTableParams', 'poService',  
+	function ($scope, $filter, ngTableParams, poService) {
+		var data = [];
+
+		poService.getShipments().success( function (response) {
+			data = response;
+		});
+
+
+		$scope.selectCustomer = [];
+
+		poService.getCustomers().success( function (response) {
+			$scope.selectCustomer = response;
+		});
+
+		$scope.selectAddress = [];
+
+		poService.getAddresses().success( function (response) {
+			$scope.selectAddress = response;
+		});
+
+
+		$scope.tableParams = new ngTableParams({
+			page: 1,
+			count: 10
+		},{
+			total: data.length,
+			getData: function($defer, params) {
+				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
+				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+			}
+		});
+		
+		$scope.formData = {};
+		$scope.sendData = function(customer) {
+			$scope.formData = angular.copy(customer)
+			poService.updateShipments($scope.formData).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+		$scope.postForm = {};
+		$scope.postData = function(customer) {
+			$scope.postForm = angular.copy(customer)
+			poService.insertShipments($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+
+}]);
+
+angular.module('postOfficeApp')
+.controller('addressesTableCtrl', [ '$scope', '$filter', 'ngTableParams', 'poService',  
+	function ($scope, $filter, ngTableParams, poService) {
+		var data = [];
+
+		poService.getAddresses().success( function (response) {
+			data = response;
+		});
+
+		$scope.selectCustomer = [];
+
+		poService.getCustomers().success( function (response) {
+			$scope.selectCustomer = response;
+		});
+
+
+		$scope.tableParams = new ngTableParams({
+			page: 1,
+			count: 10
+		},{
+			total: data.length,
+			getData: function($defer, params) {
+				var orderedData = params.sorting()?$filter('orderBy')(data, params.orderBy()):data;
+
+				orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+
+				params.total(orderedData.length);
+
+				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
+			}
+		});
+		
+		$scope.formData = {};
+		$scope.sendData = function(address) {
+			$scope.formData = angular.copy(address)
+			poService.updateAddress($scope.formData).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
+
+		$scope.postForm = {};
+		$scope.postData = function(address) {
+			$scope.postForm = angular.copy(address)
+			poService.insertAddress($scope.postForm).success(function (response) {
+				console.log("Ok",response)
+			});
+		};
 
 
 }]);
@@ -90,7 +273,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertAddress = function(data) {
-		return $http.post('api/addresses', data);
+		return $http.post('api/addresses/', data);
 	};
 
 	poService.updateAddress = function(data) {
@@ -102,7 +285,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertShipments = function(data) {
-		return $http.post('api/shipments', data);
+		return $http.post('api/shipments/', data);
 	};
 
 	poService.updateShipments = function(data) {
@@ -114,7 +297,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertDrivers = function(data) {
-		return $http.post('api/drivers', data);
+		return $http.post('api/drivers/', data);
 	};
 
 	poService.updateDrivers = function(data) {
@@ -126,7 +309,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertCustomers = function(data) {
-		return $http.post('api/customers', data);
+		return $http.post('api/customers/', data);
 	};
 
 	poService.updateCustomers = function(data) {
@@ -138,7 +321,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertDeliveryRoutes = function(data) {
-		return $http.post('api/deliveryroutes', data);
+		return $http.post('api/deliveryroutes/', data);
 	};
 
 	poService.updateDeliveryRoutes = function(data) {
@@ -150,7 +333,7 @@ angular.module('postOfficeApp')
 	};
 
 	poService.insertIncomingShipments = function(data) {
-		return $http.post('api/incomingshipments', data);
+		return $http.post('api/incomingshipments/', data);
 	};
 
 	poService.updateIncomingShipments = function(data) {

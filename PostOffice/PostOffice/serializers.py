@@ -22,10 +22,18 @@ class CustomerInputSerializer(serializers.ModelSerializer):
         fields = ('phone_number', 'first_name', 'last_name', 'customer_email')
 
 class AddressOutputSerializer(serializers.ModelSerializer):
-    customer_id = CustomerInputSerializer()
+    customer_id = CustomerInputSerializer(read_only=True)
+    state = serializers.SerializerMethodField()
+    country = serializers.SerializerMethodField()
     class Meta:
         model = Address
         fields = ('address_id', 'customer_id','street_line1','city','state','country','zipcode')
+
+    def get_state(self,obj):
+        return obj.get_state_display()
+
+    def get_country(self,obj):
+        return obj.get_country_display()
 
 class AddressInputSerializer(serializers.ModelSerializer):
     class Meta:
