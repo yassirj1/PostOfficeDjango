@@ -5,6 +5,11 @@
  */
 
 /* Toggle Styles */
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
 .btn-xl {
     padding: 18px 28px;
     font-size: 22px;

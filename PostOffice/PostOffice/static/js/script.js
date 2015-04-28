@@ -47,6 +47,14 @@ angular.module('postOfficeApp')
 		url: '/addresses',
 		templateUrl: 'static/views/manageaddresses.html',
 		controller: 'addressesTableCtrl'
+	})
+	.state('contact', {
+		url:'/contact',
+		templateUrl: 'static/views/contact.html'
+	})
+	.state('about', {
+		url:'/about',
+		templateUrl: 'static/views/about.html'
 	});
 	$urlRouterProvider.otherwise("")
 });

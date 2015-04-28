@@ -1,6 +1,6 @@
 <div id="register_view" ng-controller="RegisterCtrl">
     <div ng-if="complete == false">
-        <form role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
+        <form class="form-inline" role="form" ng-if="authenticated != true" name="registerForm" ng-submit="register(registerForm)" novalidate>
             <div class="form-group">
                 <label for="id_username">Username</label>
                 <input name="username" id="id_username" class="form-control" type="text" ng-model="model.username" placeholder="Username" required />
