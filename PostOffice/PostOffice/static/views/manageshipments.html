@@ -15,7 +15,7 @@
     </div>
     <div class="form-group">
       <label for="shippedFrom">Shipped From:</label>
-      <input ng-model="shipment.post_office_shipped_from" type="text" class="form-control" id="shippedFrom" placeholder="Enter city">
+      <input ng-model="shipment.post_office_shipped_from" type="text" class="form-control" id="shippedFrom" placeholder="Enter postoffice zip">
     </div>
     <br>
     <div class="form-group">
@@ -80,7 +80,7 @@
     </td>
     <td class="rowTd" data-title="'Rec. Name'" filter="{ 'receiver_name': 'text' }" sortable="'receiver_name'">
       <span ng-if="!shipment.$edit">{{shipment.receiver_name}}</span>
-      <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.receiver_name" value="{{shipment.receiver_name}}" readonly=""></div>
+      <div ng-if="shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="shipment.receiver_name" value="{{shipment.receiver_name}}"></div>
     </td>
     <td class="rowTd" data-title="'Date Shipped'" filter="{ 'date_ship': 'text' }" sortable="'date_ship'">
       <span ng-if="!shipment.$edit">{{shipment.date_ship}}</span>

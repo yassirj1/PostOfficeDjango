@@ -5,6 +5,9 @@
  */
 
 /* Toggle Styles */
+body {
+    background-color: #e7f2fd;
+}
 
 .portfolio-item {
     margin-bottom: 25px;
@@ -120,12 +123,26 @@
 
 
 
-.navbar {
-    border-top: 1px dotted #dedede;
-    background: #dedede;
+.navbar.navbar-inverse.navbar-fixed-top {
+    border-top: 1px dotted #018dd6;
+    background: #018dd6;
+    color: #018dd6;
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.navbar.navbar-inverse.navbar-fixed-top li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.navbar.navbar-inverse.navbar-fixed-top a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
 .navbar button {
     margin-top: 10px;
 }
