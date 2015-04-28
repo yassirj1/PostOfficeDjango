@@ -1,1 +1,30 @@
-<h1>insert your branch code here</h1>
+<div class="container">
+<h3 align="left">Incoming Shipments</h3>
+</div>
+  <br/>
+
+
+
+<table ng-table="tableParams" show-filter="true" class="table">
+    <tbody ng-repeat="incoming_shipment in $data">
+        <tr id="tr{{incoming_shipment.route_id}}" ng-class-odd="'odd'" ng-class-even="'even'">
+            <td class="rowTd" data-title="'ID'" sortable="'route_id'">
+                <span ng-if="!incoming_shipment.$edit">{{incoming_shipment.route_id}}</span>
+                <div ng-if="incoming_shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="incoming_shipment.route_id" value="{{incoming_shipment.route_id}}" readonly></div>
+            </td>
+            <td class="rowTd" data-title="'Origin'" filter="{ 'post_office_shipping_from': 'text' }" sortable="'post_office_shipping_from'">
+                <span ng-if="!incoming_shipment.$edit">{{incoming_shipment.post_office_shipping_from}}</span>
+                <div ng-if="incoming_shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="incoming_shipment.post_office_shipping_from" value="{{incoming_shipment.post_office_shipping_from}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Destination'" filter="{ 'post_office_shipping_to': 'text' }" sortable="'post_office_shipping_to'">
+                 <span ng-if="!incoming_shipment.$edit">{{incoming_shipment.post_office_shipping_to}}</span>
+                 <div ng-if="incoming_shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="incoming_shipment.post_office_shipping_to" value="{{incoming_shipment.post_office_shipping_to}}" /></div>
+            </td>
+            <td class="rowTd" data-title="'Type'" filter="{ 'route_type': 'text' }" sortable="'route_type'">
+                <span ng-if="!incoming_shipment.$edit">{{incoming_shipment.route_type}}</span>
+            <div ng-if="incoming_shipment.$edit"><input form="putForm" class="form-control" type="text" ng-model="incoming_shipment.route_type" value="{{incoming_shipment.route_type}}" /></div>
+            </td>
+          </tr>
+          
+    </tbody>
+    </table>
